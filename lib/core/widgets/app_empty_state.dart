@@ -1,114 +1,55 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
-import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 
-class AppEmptyState extends StatelessWidget {
-  final String title;
-  final String? subtitle;
-  final IconData? icon;
-  final Widget? iconWidget;
-  final Widget? footer;
-  final String? actionText;
-  final VoidCallback? onAction;
-  final Color? iconColor;
-  final Color? iconBackgroundColor;
-  final TextStyle? titleStyle;
-  final TextStyle? subtitleStyle;
-  final double iconContainerSize;
-  final double iconSize;
-  final double iconTitleSpacing;
-  final double titleSubtitleSpacing;
-  final double footerSpacing;
-
-  const AppEmptyState({
+class CustomEmptyState extends StatelessWidget {
+  const CustomEmptyState({
     super.key,
-    required this.title,
-    this.subtitle,
     this.icon,
-    this.iconWidget,
-    this.footer,
-    this.actionText,
-    this.onAction,
-    this.iconColor,
-    this.iconBackgroundColor,
-    this.titleStyle,
-    this.subtitleStyle,
-    this.iconContainerSize = 70,
-    this.iconSize = 34,
-    this.iconTitleSpacing = 20,
-    this.titleSubtitleSpacing = 8,
-    this.footerSpacing = 30,
+    required this.title,
+    this.description,
+    this.actionButton,
   });
+
+  final Widget? icon;
+  final String title; 
+  final String? description; 
+  final Widget? actionButton; 
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: iconContainerSize.w,
-              height: iconContainerSize.w,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color:
-                    iconBackgroundColor ?? ColorPalette.primarySoftBackground,
-                shape: BoxShape.circle,
-              ),
-              child:
-                  iconWidget ??
-                  Icon(
-                    icon ?? Icons.inbox_rounded,
-                    size: iconSize.sp,
-                    color: iconColor ?? ColorPalette.primary,
-                  ),
-            ),
-            verticalSpace(iconTitleSpacing),
+            if (icon != null) ...[
+              icon!,
+              verticalSpace(24),
+            ],
+
             Text(
               title,
-              textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              style: titleStyle ?? AppTextStyle.font20TextBlackSemiBoldKufam(),
+              style: AppTextStyle.fontCairoPlay24BoldWhiteColor
             ),
-            if (subtitle != null && subtitle!.trim().isNotEmpty) ...[
-              verticalSpace(titleSubtitleSpacing),
+
+            if (description != null) ...[
+              verticalSpace(8),
               Text(
-                subtitle!,
-                textDirection: TextDirection.rtl,
+                description!,
                 textAlign: TextAlign.center,
-                style:
-                    subtitleStyle ??
-                    AppTextStyle.font14TextSecondaryRegularTajawal(),
+                style: AppTextStyle.fontReadexPro14RegularGrayColor
               ),
             ],
-            if (actionText != null && onAction != null) ...[
+
+            if (actionButton != null) ...[
               verticalSpace(24),
-              ElevatedButton(
-                onPressed: onAction,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorPalette.primary,
-                  foregroundColor: ColorPalette.cardBackground,
-                  elevation: 0,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.w,
-                    vertical: 12.h,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                child: Text(
-                  actionText!,
-                  style: AppTextStyle.font15TextLightBoldTajawal(),
-                ),
-              ),
+              actionButton!,
             ],
-            if (footer != null) ...[verticalSpace(footerSpacing), footer!],
           ],
         ),
       ),

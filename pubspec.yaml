@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
   flutter_animate: ^4.5.2
   flutter_screenutil: ^5.9.3
+  google_fonts: ^8.2.1
   m3e_progress_indicator: ^1.0.0
 
 dev_dependencies:

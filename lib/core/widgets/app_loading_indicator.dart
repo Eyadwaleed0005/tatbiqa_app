@@ -6,7 +6,7 @@ import 'package:tatbiqa/core/style/app_color.dart';
 class AppLoadingIndicator extends StatelessWidget {
   const AppLoadingIndicator({
     super.key,
-    this.color = ColorPalette.surface,
+    this.color = ColorPalette.gray,
     this.backgroundColor = Colors.transparent,
     this.size = 18,
     this.strokeWidth = 3,
