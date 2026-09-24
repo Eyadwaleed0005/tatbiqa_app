@@ -200,7 +200,7 @@ class _SplashScreenContentState extends State<SplashScreenContent>
                       SplashLoadingBar(
                         duration: const Duration(seconds: 3),
                         onCompleted: () {
-                          Navigator.pushNamed(context, RouteNames.homeScreen);
+                          Navigator.pushNamed(context, RouteNames.setupCafe);
                         },
                       ),
                     ],

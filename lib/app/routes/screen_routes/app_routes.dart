@@ -1,13 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/app_startup_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/setup_cafe.dart';
 
 abstract final class AppRoutes {
   const AppRoutes._();
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     return AppStartupRoutes.generateRoute(settings) ??
-      
+      SetupCafeRoutes.generateRoute(settings) ??
         _buildUnknownRoute(settings);
   }
 
