@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/app_startup_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/main_navigation_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/session_details_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/start_session_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/setup_cafe_routes.dart';
 
 abstract final class AppRoutes {
@@ -10,6 +12,8 @@ abstract final class AppRoutes {
     return AppStartupRoutes.generateRoute(settings) ??
         SetupCafeRoutes.generateRoute(settings) ??
         MainNavigationRoutes.generateRoute(settings) ??
+        StartSessionRoutes.generateRoute(settings)??
+        SessionDetailsRoutes.generateRoute(settings)??
         _buildUnknownRoute(settings);
   }
 

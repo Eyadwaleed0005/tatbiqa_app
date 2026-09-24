@@ -4,6 +4,12 @@ import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/fontweighthelper.dart';
 
 class AppTextStyle {
+  static TextStyle fontCairo44BoldPrimaryColor = GoogleFonts.cairo(
+    fontSize: 44,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorPalette.primary,
+  );
+  /////////////////////////////////////////////
   static TextStyle fontCairo24BoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 24,
     fontWeight: FontWeightHelper.bold,
@@ -139,6 +145,11 @@ class AppTextStyle {
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.whiteColor,
   );
+  static TextStyle fontReadexPro14SemiBoldAmberColor = GoogleFonts.readexPro(
+    fontSize: 14,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.amber,
+  );
   //--------------------------------------------------------
 
   static TextStyle fontReadexPro12MediumGrayColor = GoogleFonts.readexPro(
@@ -167,5 +178,25 @@ class AppTextStyle {
     fontSize: 10,
     fontWeight: FontWeightHelper.medium,
     color: ColorPalette.gray,
+  );
+  static TextStyle fontReadexPro10SemiBoldStatusColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.statusDanger,
+  );
+  static TextStyle fontReadexPro10RegularGrayColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorPalette.gray,
+  );
+  static TextStyle fontReadexPro10RegularPrimaryColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorPalette.primary,
+  );
+    static TextStyle fontReadexPro10SemiBoldPrimaryColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.primary,
   );
 }

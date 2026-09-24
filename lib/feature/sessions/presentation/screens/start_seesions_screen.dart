@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tatbiqa/core/helper/app_system_ui.dart';
 import 'package:tatbiqa/core/widgets/custom_app_bar.dart';
-import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/rooms_screen_content.dart';
+import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sessions/start_sessions_content.dart';
 
-class RoomsScreen extends StatelessWidget {
+class StartSeesionScreen extends StatelessWidget {
   const new({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(),
-      body:AnnotatedRegion<SystemUiOverlayStyle>(
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: AppSystemUi.dark(),
-        child: RoomsScreenContent()) ,
+        child: StartSessionContent(),
+      ),
     );
   }
 }
-

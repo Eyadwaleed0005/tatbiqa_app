@@ -5,7 +5,6 @@ import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/rooms_sliver_list.dart';
-import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/rooms_header_section.dart';
 
 class RoomsScreenContent extends StatelessWidget {
   const RoomsScreenContent({super.key});
@@ -19,9 +18,7 @@ class RoomsScreenContent extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             sliver: SliverMainAxisGroup(
               slivers: [
-                const SliverToBoxAdapter(
-                  child: RoomsHeaderSection(),
-                ),
+        
                 SliverToBoxAdapter(
                   child: verticalSpace(20),
                 ),

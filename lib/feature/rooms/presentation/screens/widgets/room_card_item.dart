@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tatbiqa/core/helper/helper_functions.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
@@ -108,7 +109,7 @@ class RoomCardItem extends StatelessWidget {
                 Expanded(
                   child: CustomOutlinedButton(
                     text: isBusy ? 'إضافة مشروبات' : 'الإعدادات',
-                    onPressed: () {},
+                    onPressed: ()=> HelperFunctions.handleSessionAction(isBusy,context),
                     backgroundColor: ColorPalette.bgInteractive,
                     textStyle: AppTextStyle.fontReadexPro14MediumWhiteColor,
                   ),
@@ -117,7 +118,7 @@ class RoomCardItem extends StatelessWidget {
                 Expanded(
                   child: CustomElevatedButton(
                     text: isBusy ? 'عرض التفاصيل' : 'بدء سيشن',
-                    onPressed: () {},
+                    onPressed:()=> HelperFunctions.handleSessionAction(isBusy,context),
                     backgroundColor: ColorPalette.primary,
                     textStyle: AppTextStyle.fontReadexPro14MediumBlackColor,
                   ),

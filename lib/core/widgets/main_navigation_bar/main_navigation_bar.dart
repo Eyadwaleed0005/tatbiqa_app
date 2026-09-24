@@ -36,6 +36,7 @@ class _MainNavigationScreenViewState extends State<MainNavigationScreenView> {
     return Scaffold(
       backgroundColor: ColorPalette.blackColor,
       extendBody: true,
+      
       body: _screens[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
