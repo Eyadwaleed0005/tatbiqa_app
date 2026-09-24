@@ -14,18 +14,16 @@ class SessionDetailsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SessionDetailsHeaderWidget(),
 
-            verticalSpace(16),
-            SessionDetailsHeaderCard(
-            
-            ),
+            verticalSpace(12),
+            SessionDetailsHeaderCard(),
 
-            verticalSpace(16),
+            verticalSpace(12),
 
             CountdownTimerWidget(
               remainingDuration: const Duration(
@@ -37,12 +35,12 @@ class SessionDetailsContent extends StatelessWidget {
                 print("انتهى وقت السيشن!");
               },
             ),
-            verticalSpace(16),
+            verticalSpace(12),
 
             SummaryCheckoutSessionDetailsCard(),
 
-            verticalSpace(16),
-SessionActionsSection()
+            verticalSpace(12),
+            SessionActionsSection(),
           ],
         ),
       ),

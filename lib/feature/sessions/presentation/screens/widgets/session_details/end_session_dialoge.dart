@@ -31,7 +31,7 @@ class EndSessionDialog extends StatelessWidget {
             children: [
               Text(
                 "تأكيد إنهاء السيشن",
-                style: AppTextStyle.fontCairo24BoldWhiteColor
+                style: AppTextStyle.fontCairo24BoldWhiteColor,
               ),
               verticalSpace(12),
 
@@ -56,8 +56,6 @@ class EndSessionDialog extends StatelessWidget {
               ),
 
               verticalSpace(12),
-              Divider(color: ColorPalette.borderColor, height: 1),
-              verticalSpace(12),
 
               Text(
                 "تكلفة البليستيشن: 85 ج.م",
@@ -72,7 +70,7 @@ class EndSessionDialog extends StatelessWidget {
               verticalSpace(12),
               Text(
                 "الطلبات",
-                style: AppTextStyle.fontReadexPro12RegularGrayColor
+                style: AppTextStyle.fontReadexPro12RegularGrayColor,
               ),
               verticalSpace(6),
               Text(
@@ -88,8 +86,6 @@ class EndSessionDialog extends StatelessWidget {
                 style: AppTextStyle.fontReadexPro12RegularGrayColor,
               ),
 
-              verticalSpace(16),
-              Divider(color: ColorPalette.borderColor, height: 1),
               verticalSpace(16),
 
               Text(

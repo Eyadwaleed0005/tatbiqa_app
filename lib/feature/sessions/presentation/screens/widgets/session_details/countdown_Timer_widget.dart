@@ -62,7 +62,7 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.center,
             child: Text(
               "وقت اللعب ",
               style: AppTextStyle.fontReadexPro10RegularGrayColor,

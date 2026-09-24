@@ -35,7 +35,7 @@ class SessionActionsSection extends StatelessWidget {
                       style: AppTextStyle.fontReadexPro10SemiBoldPrimaryColor,
                     ),
                   ),
-                  horizontalSpace(8), 
+                  horizontalSpace(8),
                   Text(
                     "طلبات السيشن",
                     style: AppTextStyle.fontCairo18BoldWhiteColor,
@@ -54,7 +54,7 @@ class SessionActionsSection extends StatelessWidget {
           ),
         ),
 
-        verticalSpace(24),
+        verticalSpace(12),
 
         Row(
           children: [
@@ -64,11 +64,11 @@ class SessionActionsSection extends StatelessWidget {
                 icon: Icon(
                   Icons.power_settings_new,
                   color: ColorPalette.brownColor,
-                  size: 18.sp,
+                  size: 18,
                 ),
                 backgroundColor: ColorPalette.statusDanger,
                 textStyle: AppTextStyle.fontCairo18BoldBrownColor,
-                onPressed: () => EndSessionDialog.show(context), 
+                onPressed: () => EndSessionDialog.show(context),
               ),
             ),
             horizontalSpace(12),
@@ -78,12 +78,11 @@ class SessionActionsSection extends StatelessWidget {
                 icon: Icon(
                   Icons.add_circle_outline,
                   color: ColorPalette.primary,
-                  size: 18.sp,
+                  size: 18,
                 ),
                 backgroundColor: ColorPalette.bgInteractive,
                 textStyle: AppTextStyle.fontCairo18BoldPrimaryColor,
-                onPressed: () {
-                },
+                onPressed: () {},
               ),
             ),
           ],

@@ -109,7 +109,10 @@ class RoomCardItem extends StatelessWidget {
                 Expanded(
                   child: CustomOutlinedButton(
                     text: isBusy ? 'إضافة مشروبات' : 'الإعدادات',
-                    onPressed: ()=> HelperFunctions.handleSessionAction(isBusy,context),
+                    onPressed: () => HelperFunctions.handleFirstButtonAction(
+                      isBusy,
+                      context,
+                    ),
                     backgroundColor: ColorPalette.bgInteractive,
                     textStyle: AppTextStyle.fontReadexPro14MediumWhiteColor,
                   ),
@@ -118,7 +121,10 @@ class RoomCardItem extends StatelessWidget {
                 Expanded(
                   child: CustomElevatedButton(
                     text: isBusy ? 'عرض التفاصيل' : 'بدء سيشن',
-                    onPressed:()=> HelperFunctions.handleSessionAction(isBusy,context),
+                    onPressed: () => HelperFunctions.handleSecondButtonAction(
+                      isBusy,
+                      context,
+                    ),
                     backgroundColor: ColorPalette.primary,
                     textStyle: AppTextStyle.fontReadexPro14MediumBlackColor,
                   ),

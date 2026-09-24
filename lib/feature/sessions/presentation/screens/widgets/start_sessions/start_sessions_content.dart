@@ -18,8 +18,8 @@ class StartSessionContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-         StartSessionHeaderSection(),
-          verticalSpace(16),
+            StartSessionHeaderSection(),
+            verticalSpace(16),
             CustomAppCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class StartSessionContent extends StatelessWidget {
             ),
             verticalSpace(24),
             SessionTypeSelection(),
-            verticalSpace(100),
+            verticalSpace(200),
             Center(
               child: Text(
                 "سيبدأ احتساب الوقت فور تأكيد بدء السيشن.",
@@ -78,6 +78,7 @@ class StartSessionContent extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(text: "بدء سيشن", onPressed: () {}),
             ),
+            verticalSpace(16),
           ],
         ),
       ),
