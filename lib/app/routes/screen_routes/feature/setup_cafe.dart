@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
-import 'package:tatbiqa/feature/app_startup/presentation/screens/setup_cafe_screen.dart';
+import 'package:tatbiqa/feature/cafe/presentation/screens/setup_cafe_screen.dart';
 
 abstract final class SetupCafeRoutes {
   const SetupCafeRoutes._();

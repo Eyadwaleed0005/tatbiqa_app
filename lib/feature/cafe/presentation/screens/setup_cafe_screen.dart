@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tatbiqa/core/helper/app_system_ui.dart';
-import 'package:tatbiqa/feature/app_startup/presentation/screens/widgets/setup_cafe/setup_cafe_content.dart';
+import 'package:tatbiqa/feature/cafe/presentation/screens/widgets/setup_cafe_content.dart';
 
 class SetupCafeScreen extends StatelessWidget {
   const new({super.key});

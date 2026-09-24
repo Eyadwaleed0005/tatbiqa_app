@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
-import 'package:tatbiqa/feature/app_startup/presentation/screens/widgets/setup_cafe/setup_cafe_form.dart';
+import 'package:tatbiqa/feature/cafe/presentation/screens/widgets/setup_cafe_form.dart';
 
 class SetupCafeContent extends StatefulWidget {
   const SetupCafeContent({super.key});
