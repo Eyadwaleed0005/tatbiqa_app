@@ -12,9 +12,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorPalette.transparent, 
       elevation: 0,
-      automaticallyImplyLeading: false, 
+      automaticallyImplyLeading: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -30,11 +29,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               style: AppTextStyle.fontReadexPro14MediumBlackColor,
             ),
           ),
-          
+
           Row(
             children: [
               Text(
-                'تطبيقة', 
+                'تطبيقة',
                 style: AppTextStyle.fontCairo18SemiBoldPrimaryColor,
               ),
               horizontalSpace(6),
@@ -42,8 +41,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 width: 24.w,
                 height: 24.h,
                 child: SvgPicture.asset(
-                  AppImage.homeLogo, 
+                  AppImage.homeLogo,
                   fit: BoxFit.contain,
+                  colorFilter: ColorFilter.mode(
+                    ColorPalette.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ],
