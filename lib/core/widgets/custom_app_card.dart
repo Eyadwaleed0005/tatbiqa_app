@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomAppCard extends StatelessWidget {
   final Widget child;
   final Color? backgroundColor;
   final Color? borderColor;
 
-  const CustomCard({
+  const CustomAppCard({
     super.key,
     required this.child,
     this.backgroundColor,
@@ -20,10 +20,8 @@ class CustomCard extends StatelessWidget {
       elevation: 0,
       color: backgroundColor ?? ColorPalette.secondary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.r), 
-        side: BorderSide(
-          color: borderColor ?? ColorPalette.borderColor,
-        ),
+        borderRadius: BorderRadius.circular(12.r),
+        side: BorderSide(color: borderColor ?? ColorPalette.borderColor),
       ),
       child: Padding(
         padding: EdgeInsets.only(

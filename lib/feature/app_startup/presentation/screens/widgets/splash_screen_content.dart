@@ -153,8 +153,8 @@ class _SplashScreenContentState extends State<SplashScreenContent>
                             offset: Offset(_imageFloatAnimation.value, 0),
                             child: SvgPicture.asset(
                               AppImage.splashLogo,
-                              width: 270.w,
-                              height: 270.h,
+                              width: 270,
+                              height: 270,
                               fit: BoxFit.contain,
                             ),
                           ),

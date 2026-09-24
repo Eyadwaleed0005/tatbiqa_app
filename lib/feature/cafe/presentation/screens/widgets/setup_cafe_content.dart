@@ -19,11 +19,11 @@ class _SetupCafeContentState extends State<SetupCafeContent> {
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 50.h),
-          child: CustomCard(
+          child: CustomAppCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('تبيقة', style: AppTextStyle.fontCairo24BoldPrimaryColor),
+                Text('تطبيقة', style: AppTextStyle.fontCairo24BoldPrimaryColor),
                 verticalSpace(8),
 
                 Text('جهز محلك', style: AppTextStyle.fontCairo32BoldWhiteColor),

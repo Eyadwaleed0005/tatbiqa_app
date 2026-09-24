@@ -7,8 +7,8 @@ class ColorPalette {
   static const Color amber = Color(0xffFFB95F);
   static const Color success = Color(0xff3DFF9E);
   static const Color blackColor = Color(0xff0C081A);
-  static const Color bgInteractive = Color(0xff2B2833);
-
+  static const Color bgInteractive = Color(0xff2B2833); 
+  static const Color transparent=  Colors.transparent;
   static const Color borderColor = Color(0xff3D494C);
   static const Color purple= Color(0xFF9333EA);
   static const Color warning = Color(0xFFB8860B);
