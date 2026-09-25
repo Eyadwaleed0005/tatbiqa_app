@@ -6,12 +6,14 @@ class CustomAppCard extends StatelessWidget {
   final Widget child;
   final Color? backgroundColor;
   final Color? borderColor;
+  final EdgeInsetsGeometry? padding;
 
   const CustomAppCard({
     super.key,
     required this.child,
     this.backgroundColor,
     this.borderColor,
+    this.padding,
   });
 
   @override
@@ -24,12 +26,9 @@ class CustomAppCard extends StatelessWidget {
         side: BorderSide(color: borderColor ?? ColorPalette.borderColor),
       ),
       child: Padding(
-        padding: EdgeInsets.only(
-          top: 28.h,
-          bottom: 28.h,
-          left: 24.w,
-          right: 24.w,
-        ),
+        padding:
+            padding ??
+            EdgeInsets.only(top: 28.h, bottom: 28.h, left: 24.w, right: 24.w),
         child: child,
       ),
     );

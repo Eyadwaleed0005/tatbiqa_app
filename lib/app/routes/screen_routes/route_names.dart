@@ -7,5 +7,9 @@ abstract final class RouteNames {
   static const String main = '/mainNav';
   static const String startSession = "/startSessionScreen";
   static const String sessionDetails = "/sessionDetailsScreen";
+  static const String addDrinksToSession = "/addDrinksToSession";
+
+
 
 }
+

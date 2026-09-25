@@ -5,7 +5,7 @@ import 'package:tatbiqa/core/widgets/custom_app_bar.dart';
 import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/rooms_screen_content.dart';
 
 class RoomsScreen extends StatelessWidget {
-  const new({super.key});
+  const RoomsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

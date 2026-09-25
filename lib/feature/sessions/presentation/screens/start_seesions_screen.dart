@@ -5,7 +5,7 @@ import 'package:tatbiqa/core/widgets/custom_app_bar.dart';
 import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sessions/start_sessions_content.dart';
 
 class StartSeesionScreen extends StatelessWidget {
-  const new({super.key});
+  const StartSeesionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

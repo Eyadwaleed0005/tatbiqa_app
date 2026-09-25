@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
@@ -82,7 +83,9 @@ class SessionActionsSection extends StatelessWidget {
                 ),
                 backgroundColor: ColorPalette.bgInteractive,
                 textStyle: AppTextStyle.fontCairo18BoldPrimaryColor,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, RouteNames.addDrinksToSession);
+                },
               ),
             ),
           ],
