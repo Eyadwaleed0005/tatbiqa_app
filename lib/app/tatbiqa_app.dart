@@ -19,11 +19,10 @@ class TatbiqaApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           navigatorKey: navigatorKey,
-          title: 'الوليد',
           debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
           locale: DevicePreviewService.locale(context),
-          theme: ThemeData(),
+          theme: ThemeData.dark(),
           initialRoute: RouteNames.splashScreen,
           onGenerateRoute: AppRoutes.generateRoute,
           builder: _buildApp,

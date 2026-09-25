@@ -1,18 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
-import 'package:tatbiqa/feature/app_startup/presentation/screens/splash_screen.dart';
+import 'package:tatbiqa/feature/sessions/presentation/screens/add_drinks_to_session.dart';
 
-abstract final class AppStartupRoutes {
-  const AppStartupRoutes._();
+abstract final class AddDrinksToSessionRoutes {
+  const AddDrinksToSessionRoutes._();
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RouteNames.splashScreen:
+      case RouteNames.addDrinksToSession:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            return const SplashScreen();
+            return AddDrinksToSessionScreen();
           },
         );
 

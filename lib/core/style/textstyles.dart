@@ -4,87 +4,99 @@ import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/fontweighthelper.dart';
 
 class AppTextStyle {
-  static TextStyle fontCairoPlay24BoldPrimaryColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo20SemiBoldAmberColor = GoogleFonts.cairo(
+    fontSize: 20,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.amber,
+  );
+  //////////////////////////
+  static TextStyle fontCairo44BoldPrimaryColor = GoogleFonts.cairo(
+    fontSize: 44,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorPalette.primary,
+  );
+  /////////////////////////////////////////////
+  static TextStyle fontCairo24BoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 24,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.primary,
   );
 
-  static TextStyle fontCairoPlay24BoldWhiteColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo24BoldWhiteColor = GoogleFonts.cairo(
     fontSize: 24,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.whiteColor,
   );
   //-------------------------------------------
 
-  static TextStyle fontCairoPlay32BoldWhiteColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo32BoldWhiteColor = GoogleFonts.cairo(
     fontSize: 32,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.whiteColor,
   );
 
-  static TextStyle fontCairoPlay32BoldPrimaryColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo32BoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 32,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.primary,
   );
-  static TextStyle fontCairoPlay32BoldAmberColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo32BoldAmberColor = GoogleFonts.cairo(
     fontSize: 32,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.amber,
   );
   //-------------------------
-  static TextStyle fontCairoPlay28BoldPrimaryColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo28BoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 28,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.primary,
   );
   //----------------------------------------
-  static TextStyle fontCairoPlay18SemiBoldWhiteColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo18SemiBoldWhiteColor = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.whiteColor,
   );
-  static TextStyle fontCairoPlay18SemiBoldPrimaryColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo18SemiBoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.primary,
   );
-  static TextStyle fontCairoPlay18BoldWhiteColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo18BoldWhiteColor = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.whiteColor,
   );
-  static TextStyle fontCairoPlay18BoldBrownColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo18BoldBrownColor = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.brownColor,
   );
-  static TextStyle fontCairoPlay18BoldPrimaryColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo18BoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeightHelper.bold,
     color: ColorPalette.primary,
   );
   //------------------------------------
-  static TextStyle fontCairoPlay14RegularWhiteColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo14RegularWhiteColor = GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeightHelper.regular,
     color: ColorPalette.whiteColor,
   );
   //----------------------
-  static TextStyle fontCairoPlay12MediumDangerColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo12MediumDangerColor = GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeightHelper.medium,
     color: ColorPalette.statusDanger,
   );
 
-  static TextStyle fontCairoPlay12SemiBoldPrimaryColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo12SemiBoldPrimaryColor = GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.primary,
   );
 
-  static TextStyle fontCairoPlay12SemiBoldGrayColor = GoogleFonts.cairoPlay(
+  static TextStyle fontCairo12SemiBoldGrayColor = GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.gray,
@@ -109,7 +121,7 @@ class AppTextStyle {
     fontWeight: FontWeightHelper.regular,
     color: ColorPalette.gray,
   );
-    static TextStyle fontReadexPro14RegularWhiteColor = GoogleFonts.readexPro(
+  static TextStyle fontReadexPro14RegularWhiteColor = GoogleFonts.readexPro(
     fontSize: 14,
     fontWeight: FontWeightHelper.regular,
     color: ColorPalette.whiteColor,
@@ -123,6 +135,11 @@ class AppTextStyle {
     fontSize: 14,
     fontWeight: FontWeightHelper.medium,
     color: ColorPalette.blackColor,
+  );
+  static TextStyle fontReadexPro14MediumGraykColor = GoogleFonts.readexPro(
+    fontSize: 14,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorPalette.gray,
   );
   static TextStyle fontReadexPro14MediumPrimaryColor = GoogleFonts.readexPro(
     fontSize: 14,
@@ -139,12 +156,23 @@ class AppTextStyle {
     fontWeight: FontWeightHelper.semiBold,
     color: ColorPalette.whiteColor,
   );
+  static TextStyle fontReadexPro14SemiBoldAmberColor = GoogleFonts.readexPro(
+    fontSize: 14,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.amber,
+  );
   //--------------------------------------------------------
 
   static TextStyle fontReadexPro12MediumGrayColor = GoogleFonts.readexPro(
     fontSize: 12,
     fontWeight: FontWeightHelper.medium,
     color: ColorPalette.gray,
+  );
+
+  static TextStyle fontReadexPro12MediumPrimaryColor = GoogleFonts.readexPro(
+    fontSize: 12,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorPalette.primary,
   );
   static TextStyle fontReadexPro12MediumDangerColor = GoogleFonts.readexPro(
     fontSize: 12,
@@ -160,5 +188,32 @@ class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeightHelper.regular,
     color: ColorPalette.amber,
+  );
+
+  //----------------------------------
+  static TextStyle fontReadexPro10MediumGrayColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorPalette.gray,
+  );
+  static TextStyle fontReadexPro10SemiBoldStatusColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.statusDanger,
+  );
+  static TextStyle fontReadexPro10RegularGrayColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorPalette.gray,
+  );
+  static TextStyle fontReadexPro10RegularPrimaryColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorPalette.primary,
+  );
+  static TextStyle fontReadexPro10SemiBoldPrimaryColor = GoogleFonts.readexPro(
+    fontSize: 10,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorPalette.primary,
   );
 }
