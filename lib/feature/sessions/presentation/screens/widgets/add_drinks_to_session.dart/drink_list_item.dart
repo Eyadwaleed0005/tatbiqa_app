@@ -40,7 +40,7 @@ class DrinkListItem extends StatelessWidget {
                   isAvailable ? '${drink.quantity}' : 'نفد',
                   style: isAvailable
                       ? AppTextStyle.fontReadexPro14MediumWhiteColor
-                      : AppTextStyle.fontReadexPro14MediumGraykColor,
+                      : AppTextStyle.fontReadexPro14MediumGrayColor,
                 ),
                 horizontalSpace(16),
 
@@ -70,7 +70,7 @@ class DrinkListItem extends StatelessWidget {
                           ? AppTextStyle.fontReadexPro12RegularAmberColor
                           : AppTextStyle.fontReadexPro12RegularGrayColor,
                     ),
-                    horizontalSpace( 4), 
+                    horizontalSpace(4),
                     Text(
                       '${drink.price}',
                       style: isAvailable

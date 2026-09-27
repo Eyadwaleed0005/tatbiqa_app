@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/widgets/main_navigation_bar/custom_bottom_nav_bar.dart';
+import 'package:tatbiqa/feature/products/presentation/screens/product_screen.dart';
 import 'package:tatbiqa/feature/rooms/presentation/screens/rooms_screen.dart';
 
 class MainNavigationScreen extends StatelessWidget {
@@ -28,7 +29,7 @@ class _MainNavigationScreenViewState extends State<MainNavigationScreenView> {
     const Placeholder(),
     const RoomsScreen(),
     const Placeholder(),
-    const Placeholder(),
+    const ProductScreen(),
   ];
 
   @override
@@ -36,7 +37,7 @@ class _MainNavigationScreenViewState extends State<MainNavigationScreenView> {
     return Scaffold(
       backgroundColor: ColorPalette.blackColor,
       extendBody: true,
-      
+
       body: _screens[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
@@ -49,4 +50,3 @@ class _MainNavigationScreenViewState extends State<MainNavigationScreenView> {
     );
   }
 }
-

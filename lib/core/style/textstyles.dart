@@ -136,7 +136,7 @@ class AppTextStyle {
     fontWeight: FontWeightHelper.medium,
     color: ColorPalette.blackColor,
   );
-  static TextStyle fontReadexPro14MediumGraykColor = GoogleFonts.readexPro(
+  static TextStyle fontReadexPro14MediumGrayColor = GoogleFonts.readexPro(
     fontSize: 14,
     fontWeight: FontWeightHelper.medium,
     color: ColorPalette.gray,
