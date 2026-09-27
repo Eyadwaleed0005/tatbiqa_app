@@ -16,7 +16,7 @@ class AppImage {
   // ===== images =====
 
   static const splashLogo = "assets/images/splash_logo.svg";
-  static const homeLogo = "assets/images/home_logo.svg";
+  static const homeLogo = "assets/images/Brand Logo.png";
   static const playLogo = "assets/images/play_logo.svg";
   static const historyLogo = "assets/images/history_icon.svg";
   static const settingsLogo = "assets/images/settings_logo.svg";

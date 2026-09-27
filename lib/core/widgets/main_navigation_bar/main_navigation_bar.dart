@@ -5,6 +5,7 @@ import 'package:tatbiqa/feature/products/presentation/screens/product_screen.dar
 import 'package:tatbiqa/feature/reports/presentation/screens/archive_screen.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/dashboard_screen.dart';
 import 'package:tatbiqa/feature/rooms/presentation/screens/rooms_screen.dart';
+import 'package:tatbiqa/feature/settings/presentation/screens/settings_screen.dart';
 
 class MainNavigationScreen extends StatelessWidget {
   const MainNavigationScreen({super.key});
@@ -27,7 +28,7 @@ class _MainNavigationScreenViewState extends State<MainNavigationScreenView> {
   int _currentIndex = 2;
 
   final List<Widget> _screens = [
-    const Placeholder(),
+    const SettingsScreen(),
     const ArchiveScreen(),
     const RoomsScreen(),
     const DashboardScreen(),

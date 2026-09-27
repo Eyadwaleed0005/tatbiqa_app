@@ -1,5 +1,5 @@
-
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 
@@ -17,7 +17,7 @@ class DashedCirclePainter extends CustomPainter {
       canvas,
       center,
       radius * 0.55,
-       ColorPalette.primary.withValues(alpha: 0.9),
+      ColorPalette.primary.withValues(alpha: 0.9),
       1.6,
       animationValue * 2 * math.pi * 1.5,
       dashLength: 7.0,
@@ -28,7 +28,7 @@ class DashedCirclePainter extends CustomPainter {
       canvas,
       center,
       radius * 0.72,
-      ColorPalette.purple.withValues(alpha: 0.5),
+      ColorPalette.purple.withValues(alpha: 0.1),
       1.8,
       -animationValue * 2 * math.pi * 1.2,
       dashLength: 10.0,
@@ -39,7 +39,7 @@ class DashedCirclePainter extends CustomPainter {
       canvas,
       center,
       radius * 0.90,
-        ColorPalette.primary.withValues(alpha: 0.15),
+      ColorPalette.primary.withValues(alpha: 0.15),
       1.2,
       animationValue * 2 * math.pi,
       dashLength: 10.0,
