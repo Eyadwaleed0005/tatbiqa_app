@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/app_startup_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/main_navigation_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/room_settings_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/add_drinks_to_session.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/session_details_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/start_session_routes.dart';
@@ -16,6 +17,7 @@ abstract final class AppRoutes {
         StartSessionRoutes.generateRoute(settings)??
         SessionDetailsRoutes.generateRoute(settings)??
         AddDrinksToSessionRoutes.generateRoute(settings)??
+        RoomSettingsRoutes.generateRoute(settings)??
         _buildUnknownRoute(settings);
   }
 

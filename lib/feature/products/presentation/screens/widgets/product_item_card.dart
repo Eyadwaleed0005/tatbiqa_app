@@ -6,6 +6,7 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 import 'package:tatbiqa/core/widgets/custom_outlined_button.dart';
+import 'package:tatbiqa/feature/products/presentation/screens/widgets/add_edit_product_dialog.dart';
 
 class ProductItemCard extends StatelessWidget {
   final String productName;
@@ -66,7 +67,7 @@ class ProductItemCard extends StatelessWidget {
                   borderColor: ColorPalette.borderColor,
                   backgroundColor: ColorPalette.secondary,
                   textStyle: AppTextStyle.fontReadexPro14MediumWhiteColor,
-                  onPressed: () {},
+                  onPressed: () =>AddEditProductDialog.show(context),
                 ),
               ),
               horizontalSpace(12),

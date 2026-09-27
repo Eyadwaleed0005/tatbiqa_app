@@ -13,27 +13,10 @@ class EditUserInfo extends StatefulWidget {
 }
 
 class _EditUserInfoState extends State<EditUserInfo> {
-  final TextEditingController _storeNameController = TextEditingController(
-    text: "ELHAMOUL CITY",
-  );
-  final TextEditingController _emailController = TextEditingController(
-    text: "ghorab@gmail.com",
-  );
-  final TextEditingController _ownerNameController = TextEditingController(
-    text: "Eyad waleed",
-  );
-  final TextEditingController _phoneController = TextEditingController(
-    text: "010********",
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    _storeNameController;
-    _emailController;
-    _ownerNameController;
-    _phoneController;
-  }
+  final TextEditingController _storeNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _ownerNameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   void dispose() {
@@ -59,14 +42,14 @@ class _EditUserInfoState extends State<EditUserInfo> {
           CustomTextFormField(
             controller: _storeNameController,
             labelText: "اسم المحل",
-            hintText: "أدخل اسم المحل",
+            hintText: "ELHAMOUL CITY",
           ),
           verticalSpace(12),
 
           CustomTextFormField(
             controller: _emailController,
             labelText: "البريد الالكتروني",
-            hintText: "أدخل البريد الالكتروني",
+            hintText: "ghorab@gmail.com",
             keyboardType: TextInputType.emailAddress,
           ),
           verticalSpace(12),
@@ -74,14 +57,14 @@ class _EditUserInfoState extends State<EditUserInfo> {
           CustomTextFormField(
             controller: _ownerNameController,
             labelText: "اسم صاحب المحل",
-            hintText: "أدخل اسم صاحب المحل",
+            hintText: "Eyad waleed",
           ),
           verticalSpace(12),
 
           CustomTextFormField(
             controller: _phoneController,
             labelText: "رقم التليفون",
-            hintText: "أدخل رقم التليفون",
+            hintText: "010********",
             keyboardType: TextInputType.phone,
           ),
           verticalSpace(20),

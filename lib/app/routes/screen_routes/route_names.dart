@@ -9,6 +9,7 @@ abstract final class RouteNames {
   static const String sessionDetails = "/sessionDetailsScreen";
   static const String addDrinksToSession = "/addDrinksToSession";
 
+  static const String roomSettings = '/roomSettings';
 
 
 }
