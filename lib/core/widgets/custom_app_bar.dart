@@ -37,18 +37,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 style: AppTextStyle.fontCairo18SemiBoldPrimaryColor,
               ),
               horizontalSpace(6),
-              SizedBox(
-                width: 24.w,
-                height: 24.h,
-                child: SvgPicture.asset(
-                  AppImage.homeLogo,
-                  fit: BoxFit.contain,
-                  colorFilter: ColorFilter.mode(
-                    ColorPalette.primary,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
+              SvgPicture.asset(AppImage.homeLogo, fit: BoxFit.contain),
             ],
           ),
         ],

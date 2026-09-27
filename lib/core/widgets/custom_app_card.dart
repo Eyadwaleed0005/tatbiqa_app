@@ -23,7 +23,7 @@ class CustomAppCard extends StatelessWidget {
       color: backgroundColor ?? ColorPalette.secondary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
-        side: BorderSide(color: borderColor ?? ColorPalette.borderColor),
+        side: BorderSide(color: borderColor ?? ColorPalette.bgInteractive),
       ),
       child: Padding(
         padding:
