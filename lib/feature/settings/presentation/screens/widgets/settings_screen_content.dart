@@ -5,6 +5,7 @@ import 'package:tatbiqa/core/style/app_animations.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
+import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/add_room_dialog.dart';
 import 'package:tatbiqa/feature/settings/presentation/screens/widgets/edit_user_info.dart';
 
 class SettingsScreenContent extends StatelessWidget {
@@ -32,7 +33,7 @@ class SettingsScreenContent extends StatelessWidget {
                   children: [
                     Text(
                       "إضافة غرفة",
-                      style: AppTextStyle.fontCairo18SemiBoldWhiteColor
+                      style: AppTextStyle.fontCairo18SemiBoldWhiteColor,
                     ),
                     verticalSpace(4),
                     Text(
@@ -45,7 +46,7 @@ class SettingsScreenContent extends StatelessWidget {
                       width: double.infinity,
                       child: CustomElevatedButton(
                         text: "إضافة غرفة جديدة",
-                        onPressed: () {},
+                        onPressed: () => AddRoomDialog.show(context),
                       ),
                     ),
                   ],
