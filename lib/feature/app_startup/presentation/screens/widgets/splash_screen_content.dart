@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 import 'package:tatbiqa/app/routes/app_images_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
+import 'package:tatbiqa/core/hive/hive_boxes.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/feature/app_startup/presentation/screens/widgets/dashed_circles_widget.dart';
 import 'package:tatbiqa/feature/app_startup/presentation/screens/widgets/splash_loading_bar.dart';
+import 'package:tatbiqa/feature/cafe/data/models/cafe_model.dart';
 
 class SplashScreenContent extends StatefulWidget {
   const SplashScreenContent({super.key});
@@ -113,7 +116,17 @@ class _SplashScreenContentState extends State<SplashScreenContent>
     _textFloatController.dispose();
     super.dispose();
   }
+void _goNext() {
+  if (!mounted) return;
 
+  final box = Hive.box<CafeModel>(HiveBoxes.cafe);
+  final bool isSetupDone = box.isNotEmpty;
+
+  Navigator.pushReplacementNamed(
+    context,
+    isSetupDone ? RouteNames.main : RouteNames.setupCafe,
+  );
+}
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -199,9 +212,7 @@ class _SplashScreenContentState extends State<SplashScreenContent>
                       verticalSpace(6),
                       SplashLoadingBar(
                         duration: const Duration(seconds: 3),
-                        onCompleted: () {
-                          Navigator.pushNamed(context, RouteNames.setupCafe);
-                        },
+                        onCompleted:_goNext
                       ),
                     ],
                   ],

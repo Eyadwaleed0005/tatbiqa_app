@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
-import 'package:tatbiqa/core/style/app_animations.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
@@ -14,7 +13,7 @@ class RoomsScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: AppAnimations.screenSection(
+    
         child: CustomScrollView(
           slivers: [
             SliverPadding(
@@ -49,7 +48,7 @@ class RoomsScreenContent extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      
     );
   }
 }

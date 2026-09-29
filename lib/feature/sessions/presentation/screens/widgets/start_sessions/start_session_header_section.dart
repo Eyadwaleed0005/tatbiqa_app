@@ -5,7 +5,7 @@ import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 
 class StartSessionHeaderSection extends StatelessWidget {
-  const new({
+  const StartSessionHeaderSection({
     super.key,
   });
 

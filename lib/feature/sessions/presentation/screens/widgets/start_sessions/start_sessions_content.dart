@@ -10,7 +10,7 @@ import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sess
 import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sessions/start_session_header_section.dart';
 
 class StartSessionContent extends StatelessWidget {
-  const new({super.key});
+  const StartSessionContent({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(

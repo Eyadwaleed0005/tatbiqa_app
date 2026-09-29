@@ -15,6 +15,7 @@ class ColorPalette {
   static const Color error = Color(0xFFC0392B);
   static const Color whiteColor = Color(0xffE7E0EE);
   static const Color brownColor = Color(0xff690005);
+  static const Color surface = Color(0xFFFFFFFF);
 
   static const Color gray = Color(0xffBCC9CD);
 }

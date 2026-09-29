@@ -6,7 +6,7 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 
 class SummaryCheckoutSessionDetailsCard extends StatelessWidget {
-  const new({super.key});
+  const SummaryCheckoutSessionDetailsCard({super.key});
 
   @override
   Widget build(BuildContext context) {

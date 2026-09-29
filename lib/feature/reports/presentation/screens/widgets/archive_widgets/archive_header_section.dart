@@ -4,7 +4,7 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/archive_widgets/custom_search_icon.dart';
 
 class ArchiveHeaderSection extends StatelessWidget {
-  const new({
+  const ArchiveHeaderSection({
     super.key,
   });
 

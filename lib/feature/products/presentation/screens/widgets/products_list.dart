@@ -4,7 +4,7 @@ import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/feature/products/presentation/screens/widgets/product_item_card.dart';
 
 class ProductsList extends StatelessWidget {
-  const new({
+  const ProductsList({
     super.key,
   });
 

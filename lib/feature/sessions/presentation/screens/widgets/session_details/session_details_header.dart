@@ -6,7 +6,7 @@ import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 
 class SessionDetailsHeaderWidget extends StatelessWidget {
-  const new({super.key});
+  const SessionDetailsHeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

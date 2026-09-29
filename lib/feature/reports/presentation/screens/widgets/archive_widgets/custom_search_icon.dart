@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 
 class CustomSearchIcon extends StatelessWidget {
-  const new({
+  const CustomSearchIcon({
     super.key,
   });
 
