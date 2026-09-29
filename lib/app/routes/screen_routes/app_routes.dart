@@ -1,14 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/app_startup_routes.dart';
-import 'package:tatbiqa/app/routes/screen_routes/feature/setup_cafe.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/main_navigation_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/room_settings_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/add_drinks_to_session.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/session_details_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/start_session_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/setup_cafe_routes.dart';
 
 abstract final class AppRoutes {
   const AppRoutes._();
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     return AppStartupRoutes.generateRoute(settings) ??
-      SetupCafeRoutes.generateRoute(settings) ??
+        SetupCafeRoutes.generateRoute(settings) ??
+        MainNavigationRoutes.generateRoute(settings) ??
+        StartSessionRoutes.generateRoute(settings)??
+        SessionDetailsRoutes.generateRoute(settings)??
+        AddDrinksToSessionRoutes.generateRoute(settings)??
+        RoomSettingsRoutes.generateRoute(settings)??
         _buildUnknownRoute(settings);
   }
 

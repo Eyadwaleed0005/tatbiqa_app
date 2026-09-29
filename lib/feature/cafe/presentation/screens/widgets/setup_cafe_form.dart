@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
@@ -70,7 +71,9 @@ class _SetupCafeFormState extends State<SetupCafeForm> {
             child: CustomElevatedButton(
               text: 'حفظ',
               onPressed: () {
-                if (formKey.currentState!.validate()) {}
+                if (formKey.currentState!.validate()) {
+                  Navigator.pushNamed(context, RouteNames.main);
+                }
               },
               textStyle: AppTextStyle.fontReadexPro14MediumBlackColor,
             ),

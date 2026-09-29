@@ -4,7 +4,7 @@ import 'package:tatbiqa/core/helper/app_system_ui.dart';
 import 'package:tatbiqa/feature/cafe/presentation/screens/widgets/setup_cafe_content.dart';
 
 class SetupCafeScreen extends StatelessWidget {
-  const new({super.key});
+  const SetupCafeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
