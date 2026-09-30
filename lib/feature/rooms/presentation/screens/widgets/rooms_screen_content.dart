@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tatbiqa/core/helper/spacer.dart';
-import 'package:tatbiqa/core/style/app_color.dart';
-import 'package:tatbiqa/core/style/textstyles.dart';
-import 'package:tatbiqa/core/widgets/custom_app_button.dart';
-import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/add_room_dialog.dart';
+
 import 'package:tatbiqa/feature/rooms/presentation/screens/widgets/rooms_sliver_list.dart';
 
 class RoomsScreenContent extends StatelessWidget {
@@ -13,42 +9,14 @@ class RoomsScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-    
-        child: CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-              sliver: SliverMainAxisGroup(
-                slivers: [
-                  SliverToBoxAdapter(child: verticalSpace(20)),
-
-                  SliverToBoxAdapter(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'الغرف',
-                          style: AppTextStyle.fontCairo24BoldWhiteColor,
-                        ),
-                        CustomElevatedButton(
-                          text: 'إضافة غرفة',
-                          onPressed: () => AddRoomDialog.show(context),
-                          backgroundColor: ColorPalette.primary,
-                          textStyle:
-                              AppTextStyle.fontReadexPro14MediumBlackColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SliverToBoxAdapter(child: verticalSpace(16)),
-
-                  const RoomsSliverList(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      
+      child: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            sliver: const RoomsSliverList(),
+          ),
+        ],
+      ),
     );
   }
 }

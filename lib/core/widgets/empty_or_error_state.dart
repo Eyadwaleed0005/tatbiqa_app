@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 
-class CustomEmptyState extends StatelessWidget {
-  const CustomEmptyState({
+class EmptyOrErrorState extends StatelessWidget {
+  const EmptyOrErrorState({
     super.key,
     this.icon,
     required this.title,
@@ -26,12 +26,13 @@ class CustomEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            
             if (icon != null) ...[icon!, verticalSpace(24)],
 
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyle.fontCairo24BoldWhiteColor,
+              style: AppTextStyle.fontReadexPro14RegularGrayColor,
             ),
 
             if (description != null) ...[

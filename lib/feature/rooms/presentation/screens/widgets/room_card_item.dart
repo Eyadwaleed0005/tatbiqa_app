@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/helper_functions.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
@@ -7,16 +8,18 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 import 'package:tatbiqa/core/widgets/custom_outlined_button.dart';
+import 'package:tatbiqa/feature/rooms/domain/entity/room_entity.dart';
+import 'package:tatbiqa/feature/rooms/presentation/cubit/rooms_cubit.dart';
 
 class RoomCardItem extends StatelessWidget {
-  final Map<String, dynamic> roomData;
+  final RoomEntity room;
 
-  const RoomCardItem({super.key, required this.roomData});
+  final bool isBusy;
+
+  const RoomCardItem({super.key, required this.room, this.isBusy = false});
 
   @override
   Widget build(BuildContext context) {
-    final bool isBusy = roomData['isBusy'] ?? false;
-
     return Directionality(
       textDirection: TextDirection.rtl,
       child: CustomAppCard(
@@ -43,13 +46,12 @@ class RoomCardItem extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        roomData['status'],
+                        isBusy ? 'مشغولة' : 'متاحة',
                         style: isBusy
                             ? AppTextStyle.fontReadexPro12MediumDangerColor
                             : AppTextStyle.fontReadexPro14MediumPrimaryColor,
                       ),
                       horizontalSpace(6),
-
                       Container(
                         width: 8.w,
                         height: 8.h,
@@ -64,7 +66,7 @@ class RoomCardItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  roomData['name'],
+                  room.name,
                   style: AppTextStyle.fontCairo18SemiBoldWhiteColor,
                 ),
               ],
@@ -72,34 +74,18 @@ class RoomCardItem extends StatelessWidget {
             verticalSpace(12),
 
             Text(
-              'سعر الساعة: ${roomData['hourlyRate']}',
+              'سعر الساعة: ${room.hourlyRate.toStringAsFixed(0)} ج.م',
               style: AppTextStyle.fontReadexPro14RegularGrayColor,
             ),
-            if (isBusy) ...[
-              verticalSpace(4),
-              Text(
-                'بدأت: ${roomData['startTime']}',
-                style: AppTextStyle.fontReadexPro14RegularGrayColor,
-              ),
-              verticalSpace(4),
-              Text(
-                'مدة السيشن الحالية: ${roomData['currentDuration']}',
-                style: AppTextStyle.fontReadexPro14RegularGrayColor,
-              ),
-              verticalSpace(4),
-              Text(
-                'إجمالي السيشن الحالي: ${roomData['currentTotal']}',
-                style: AppTextStyle.fontReadexPro14RegularGrayColor,
-              ),
-            ],
+
             verticalSpace(4),
             Text(
-              'دخل الغرفة اليوم: ${roomData['todayIncome']}',
+              'دخل الغرفة اليوم: 0 ج.م',
               style: AppTextStyle.fontReadexPro14RegularGrayColor,
             ),
             verticalSpace(4),
             Text(
-              'عدد سيشنات اليوم: ${roomData['sessionsCount']}',
+              'عدد سيشنات اليوم: 0',
               style: AppTextStyle.fontReadexPro14RegularGrayColor,
             ),
             verticalSpace(16),
@@ -109,10 +95,16 @@ class RoomCardItem extends StatelessWidget {
                 Expanded(
                   child: CustomOutlinedButton(
                     text: isBusy ? 'إضافة مشروبات' : 'الإعدادات',
-                    onPressed: () => HelperFunctions.handleFirstButtonAction(
-                      isBusy,
-                      context,
-                    ),
+                    onPressed: ()async {
+                    await  HelperFunctions.handleFirstButtonAction(
+                        isBusy,
+                        context,
+                        room,
+                      );
+                      if (context.mounted) {
+                        context.read<RoomsCubit>().getRooms();
+                      }
+                    },
                     backgroundColor: ColorPalette.bgInteractive,
                     textStyle: AppTextStyle.fontReadexPro14MediumWhiteColor,
                   ),

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:tatbiqa/feature/cafe/domain/entity/cafe_entity.dart';
 
-abstract class CafeState extends Equatable {
+sealed class CafeState extends Equatable {
   const CafeState();
 
   @override

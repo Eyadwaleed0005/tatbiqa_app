@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
+import 'package:tatbiqa/feature/rooms/domain/entity/room_entity.dart';
 
 class HelperFunctions {
-  static void handleFirstButtonAction(bool isBusy, BuildContext context) {
+  static Future<void> handleFirstButtonAction(
+    bool isBusy,
+    BuildContext context,
+    RoomEntity room,
+  ) async {
     if (isBusy) {
       Navigator.pushNamed(context, RouteNames.addDrinksToSession);
     } else {
-      Navigator.pushNamed(context, RouteNames.roomSettings);
+      await Navigator.pushNamed(
+        context,
+        RouteNames.roomSettings,
+        arguments: room,
+      );
     }
   }
 
