@@ -13,7 +13,7 @@ class CafeCubit extends Cubit<CafeState> {
     required String ownerName,
     required String phone,
   }) async {
-    emit(CafeLoading());
+    emit(SaveCafeLoading());
 
     final result = await cafeUseCase.saveCafeInfo(
       cafeName: cafeName,
@@ -24,7 +24,18 @@ class CafeCubit extends Cubit<CafeState> {
 
     result.fold(
       (failure) => emit(CafeError(message: failure.message)),
-      (cafeEntity) => emit(CafeSuccess(cafeEntity: cafeEntity)),
+      (cafeEntity) => emit(SaveCafeSuccess(cafeEntity: cafeEntity)),
+    );
+  }
+
+  Future<void> getCafeInfo() async {
+    emit(GetDataCafeLoading());
+
+    final result = await cafeUseCase.getCafeData();
+
+    result.fold(
+      (failure) => emit(GetDataCafeError(message: failure.message)),
+      (cafeEntity) => emit(GetDataCafeSuccess(cafeEntity: cafeEntity)),
     );
   }
 }

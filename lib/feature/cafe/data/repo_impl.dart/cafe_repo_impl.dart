@@ -27,4 +27,16 @@ class CafeRepoImpl extends CafeRepo {
       return left(LocalDatabaseFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, CafeEntity>> getCafeData() async {
+    try {
+      final cafeData = await localDataSource.getCafeByUser();
+      if (cafeData == null) return Left(LocalDatabaseFailure( 'لا توجد بيانات للمحل'));
+
+      return right(cafeData);
+    } catch (e) {
+      return left(LocalDatabaseFailure(e.toString()));
+    }
+  }
 }

@@ -37,11 +37,11 @@ class _SetupCafeFormState extends State<SetupCafeForm> {
     if (!formKey.currentState!.validate()) return;
 
     context.read<CafeCubit>().saveCafeInfo(
-          cafeName: cafeNameController.text.trim(),
-          email: emailController.text.trim(),
-          ownerName: ownerNameController.text.trim(),
-          phone: phoneController.text.trim(),
-        );
+      cafeName: cafeNameController.text.trim(),
+      email: emailController.text.trim(),
+      ownerName: ownerNameController.text.trim(),
+      phone: phoneController.text.trim(),
+    );
   }
 
   void _showSuccessDialog() {
@@ -82,9 +82,9 @@ class _SetupCafeFormState extends State<SetupCafeForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<CafeCubit, CafeState>(
       listenWhen: (previous, current) =>
-          current is CafeSuccess || current is CafeError,
+          current is SaveCafeSuccess || current is CafeError,
       listener: (context, state) {
-        if (state is CafeSuccess) {
+        if (state is SaveCafeSuccess) {
           _showSuccessDialog();
         } else if (state is CafeError) {
           _showErrorDialog(state.message);
@@ -127,7 +127,7 @@ class _SetupCafeFormState extends State<SetupCafeForm> {
               verticalSpace(24),
               SizedBox(
                 width: double.infinity,
-                child:   CustomElevatedButton(
+                child: CustomElevatedButton(
                   text: 'حفظ',
                   onPressed: _submit,
                   textStyle: AppTextStyle.fontReadexPro14MediumBlackColor,

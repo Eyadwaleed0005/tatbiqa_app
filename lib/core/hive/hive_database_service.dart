@@ -77,7 +77,7 @@ class HiveDatabaseService implements LocalDatabaseService {
     );
   }
 
- @override
+  @override
   Future<void> deleteData<T>({
     required String boxName,
     required dynamic key,
@@ -94,6 +94,7 @@ class HiveDatabaseService implements LocalDatabaseService {
       },
     );
   }
+
   @override
   Stream<BoxEvent> watchBox({required String boxName}) async* {
     final box = Hive.isBoxOpen(boxName)
@@ -236,5 +237,13 @@ class HiveDatabaseService implements LocalDatabaseService {
 
   String _addLinePrefix(String text) {
     return text.split('\n').map((line) => '│   $line').join('\n');
+  }
+
+  @override
+  Future<T?> getData<T>({required String boxName, required dynamic key}) async {
+    final box = Hive.isBoxOpen(boxName)
+        ? Hive.box<T>(boxName)
+        : await Hive.openBox<T>(boxName);
+    return box.get(key);
   }
 }

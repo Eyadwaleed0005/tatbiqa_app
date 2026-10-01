@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tatbiqa/core/error/failure.dart';
 import 'package:tatbiqa/feature/cafe/domain/entity/cafe_entity.dart';
-import 'package:tatbiqa/feature/cafe/domain/usecase/cafe_use_case.dart'; 
+import 'package:tatbiqa/feature/cafe/domain/usecase/cafe_use_case.dart';
 import 'package:tatbiqa/feature/cafe/presentation/cubit/cafe_cubit.dart';
 import 'package:tatbiqa/feature/cafe/presentation/cubit/cafe_state.dart';
 
@@ -16,7 +16,7 @@ void main() {
 
   setUp(() {
     mockUseCase = MockCafeUseCase();
-    cubit = CafeCubit(cafeUseCase: mockUseCase); 
+    cubit = CafeCubit(cafeUseCase: mockUseCase);
   });
 
   tearDown(() {
@@ -40,13 +40,20 @@ void main() {
     phone: tPhone,
   );
 
-  const tFailure = LocalDatabaseFailure( 'Failed to save cafe'); 
+  const tFailure = LocalDatabaseFailure('Failed to save cafe');
 
   blocTest<CafeCubit, CafeState>(
     'emits [CafeLoading, CafeSuccess] when saveCafeInfo is successful',
     build: () {
-      when(() => mockUseCase.saveCafeInfo(cafeName: tCafeName, email: tEmail, ownerName: tOwnerName, phone:tPhone)).thenAnswer((_) async => const Right(tCafeEntity));
-      
+      when(
+        () => mockUseCase.saveCafeInfo(
+          cafeName: tCafeName,
+          email: tEmail,
+          ownerName: tOwnerName,
+          phone: tPhone,
+        ),
+      ).thenAnswer((_) async => const Right(tCafeEntity));
+
       return cubit;
     },
     act: (cubit) => cubit.saveCafeInfo(
@@ -56,15 +63,22 @@ void main() {
       phone: tPhone,
     ),
     expect: () => [
-      CafeLoading(),
-      const CafeSuccess(cafeEntity: tCafeEntity),
+      SaveCafeLoading(),
+      const SaveCafeSuccess(cafeEntity: tCafeEntity),
     ],
   );
 
   blocTest<CafeCubit, CafeState>(
     'emits [CafeLoading, CafeError] when saveCafeInfo fails',
     build: () {
-      when(() => mockUseCase.saveCafeInfo(cafeName: tCafeName, email: tEmail, ownerName: tOwnerName, phone:tPhone)).thenAnswer((_) async => const Left(tFailure));
+      when(
+        () => mockUseCase.saveCafeInfo(
+          cafeName: tCafeName,
+          email: tEmail,
+          ownerName: tOwnerName,
+          phone: tPhone,
+        ),
+      ).thenAnswer((_) async => const Left(tFailure));
       return cubit;
     },
     act: (cubit) => cubit.saveCafeInfo(
@@ -74,8 +88,8 @@ void main() {
       phone: tPhone,
     ),
     expect: () => [
-      CafeLoading(),
-      const CafeError(message: 'Failed to save cafe'), 
+      SaveCafeLoading(),
+      const CafeError(message: 'Failed to save cafe'),
     ],
   );
 }

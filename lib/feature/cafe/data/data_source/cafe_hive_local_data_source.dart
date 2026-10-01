@@ -8,5 +8,6 @@ abstract class CafeHiveLocalDataSource {
     required String ownerName,
     required String phone,
   });
+    Future<CafeModel?> getCafeByUser();
    
 }

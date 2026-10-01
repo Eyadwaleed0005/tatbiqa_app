@@ -16,4 +16,6 @@ abstract class LocalDatabaseService {
   Future<void> deleteData<T>({required String boxName, required dynamic key});
 
   Stream<BoxEvent> watchBox({required String boxName});
+  Future<T?> getData<T>({required String boxName, required dynamic key});
+
 }

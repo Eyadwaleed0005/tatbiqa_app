@@ -119,7 +119,6 @@ class _RoomSettingsScreenContentState extends State<RoomSettingsScreenContent> {
                     keyboardType: TextInputType.number,
                   ),
                   verticalSpace(40),
-                  // --- زر حفظ التغييرات ---
                   SizedBox(
                     width: double.infinity,
                     child: CustomElevatedButton(

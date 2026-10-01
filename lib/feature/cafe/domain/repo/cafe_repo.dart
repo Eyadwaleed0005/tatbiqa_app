@@ -9,4 +9,8 @@ abstract class CafeRepo {
     required String ownerName,
     required String phone,
   });
+
+  Future<Either<Failure, CafeEntity>> getCafeData();
+
+
 }

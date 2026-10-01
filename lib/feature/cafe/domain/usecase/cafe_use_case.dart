@@ -21,4 +21,8 @@ class CafeUseCase {
       phone: phone,
     );
   }
+
+  Future<Either<Failure, CafeEntity>> getCafeData() async {
+    return await repo.getCafeData();
+  }
 }
