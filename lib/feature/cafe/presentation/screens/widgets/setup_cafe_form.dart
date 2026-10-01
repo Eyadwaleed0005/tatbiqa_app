@@ -82,11 +82,11 @@ class _SetupCafeFormState extends State<SetupCafeForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<CafeCubit, CafeState>(
       listenWhen: (previous, current) =>
-          current is SaveCafeSuccess || current is CafeError,
+          current is SaveCafeDataSuccess || current is SaveCafeDataError,
       listener: (context, state) {
-        if (state is SaveCafeSuccess) {
+        if (state is SaveCafeDataSuccess) {
           _showSuccessDialog();
-        } else if (state is CafeError) {
+        } else if (state is SaveCafeDataError) {
           _showErrorDialog(state.message);
         }
       },

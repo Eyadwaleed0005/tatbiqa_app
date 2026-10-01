@@ -63,8 +63,8 @@ void main() {
       phone: tPhone,
     ),
     expect: () => [
-      SaveCafeLoading(),
-      const SaveCafeSuccess(cafeEntity: tCafeEntity),
+      SaveCafeDataLoading(),
+      const SaveCafeDataSuccess(cafeEntity: tCafeEntity),
     ],
   );
 
@@ -88,8 +88,8 @@ void main() {
       phone: tPhone,
     ),
     expect: () => [
-      SaveCafeLoading(),
-      const CafeError(message: 'Failed to save cafe'),
+      SaveCafeDataLoading(),
+      const SaveCafeDataError(message: 'Failed to save cafe'),
     ],
   );
 }

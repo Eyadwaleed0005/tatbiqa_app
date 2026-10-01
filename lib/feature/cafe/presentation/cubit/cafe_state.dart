@@ -10,19 +10,19 @@ sealed class CafeState extends Equatable {
 
 class CafeInitial extends CafeState {}
 
-class SaveCafeLoading extends CafeState {}
+class SaveCafeDataLoading extends CafeState {}
 
-class SaveCafeSuccess extends CafeState {
+class SaveCafeDataSuccess extends CafeState {
   final CafeEntity cafeEntity;
-  const SaveCafeSuccess({required this.cafeEntity});
+  const SaveCafeDataSuccess({required this.cafeEntity});
 
   @override
   List<Object?> get props => [cafeEntity];
 }
 
-class CafeError extends CafeState {
+class SaveCafeDataError extends CafeState {
   final String message;
-  const CafeError({required this.message});
+  const SaveCafeDataError({required this.message});
 
   @override
   List<Object?> get props => [message];
