@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
+import 'package:tatbiqa/core/widgets/app_toast.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 import 'package:tatbiqa/core/widgets/custom_text_form_field.dart';
@@ -58,12 +59,11 @@ class _EditUserInfoState extends State<EditUserInfo> {
         } else if (state is SaveCafeDataSuccess) {
           _fillFields(state.cafeEntity);
           setState(() => _isEditing = false);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("تم حفظ بيانات المحل بنجاح"),
-              backgroundColor: Colors.green,
-            ),
-          );
+         AppToast.show(
+      context,
+      "تم حفظ بيانات المحل بنجاح",
+      type: ToastType.success,
+    );
         } else if (state is SaveCafeDataError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
