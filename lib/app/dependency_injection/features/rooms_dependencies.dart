@@ -8,7 +8,7 @@ import 'package:tatbiqa/feature/rooms/presentation/cubit/add_room_cubit.dart';
 import 'package:tatbiqa/feature/rooms/presentation/cubit/room_settings_cubit.dart';
 import 'package:tatbiqa/feature/rooms/presentation/cubit/rooms_cubit.dart';
 
-void registerAddRoomsDependencies(GetIt getIt) {
+void registerRoomsDependencies(GetIt getIt) {
   _registerLocalDataSources(getIt);
   _registerRepositories(getIt);
   _registerUseCases(getIt);
@@ -39,9 +39,9 @@ void _registerCubits(GetIt getIt) {
   );
 
   getIt.registerFactory<RoomsCubit>(
-    () => RoomsCubit(roomUseCase: getIt<RoomUseCase>(),),
+    () => RoomsCubit(roomUseCase: getIt<RoomUseCase>()),
   );
-   getIt.registerFactory<RoomSettingsCubit>(
-    () => RoomSettingsCubit(roomUseCase: getIt<RoomUseCase>(),),
+  getIt.registerFactory<RoomSettingsCubit>(
+    () => RoomSettingsCubit(roomUseCase: getIt<RoomUseCase>()),
   );
 }

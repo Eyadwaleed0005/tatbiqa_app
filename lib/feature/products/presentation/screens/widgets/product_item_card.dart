@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
@@ -6,20 +7,22 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 import 'package:tatbiqa/core/widgets/custom_outlined_button.dart';
+import 'package:tatbiqa/feature/products/domain/entity/products_entity.dart';
+import 'package:tatbiqa/feature/products/presentation/cubit/products_cubit.dart';
 import 'package:tatbiqa/feature/products/presentation/screens/widgets/add_edit_product_dialog.dart';
 
 class ProductItemCard extends StatelessWidget {
-  final String productName;
-  final bool isAvailable;
+  final ProductEntity product;
 
   const ProductItemCard({
     super.key,
-    required this.productName,
-    required this.isAvailable,
+    required this.product,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bool isAvailable = product.isAvailable; 
+
     return CustomAppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -28,13 +31,12 @@ class ProductItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                productName,
+                '${product.name} — ${product.price} ج.م',
                 style: AppTextStyle.fontCairo18SemiBoldWhiteColor,
               ),
               verticalSpace(4),
               Row(
                 mainAxisSize: MainAxisSize.min,
-
                 children: [
                   Text(
                     isAvailable ? 'متاح' : 'غير متاح',
@@ -58,7 +60,6 @@ class ProductItemCard extends StatelessWidget {
             ],
           ),
           verticalSpace(16),
-
           Row(
             children: [
               Expanded(
@@ -67,7 +68,10 @@ class ProductItemCard extends StatelessWidget {
                   borderColor: ColorPalette.borderColor,
                   backgroundColor: ColorPalette.secondary,
                   textStyle: AppTextStyle.fontReadexPro14MediumWhiteColor,
-                  onPressed: () =>AddEditProductDialog.show(context),
+                  onPressed: () => AddEditProductDialog.show(
+                    context,
+                 product: product,
+                  ),
                 ),
               ),
               horizontalSpace(12),
@@ -76,7 +80,11 @@ class ProductItemCard extends StatelessWidget {
                   text: 'حذف',
                   backgroundColor: ColorPalette.statusDanger,
                   textStyle: AppTextStyle.fontReadexPro14MediumBlackColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<ProductsCubit>().deleteProduct(id: product.id).then((_) {
+        context.read<ProductsCubit>().fetchProdcts();
+      });
+                  },
                 ),
               ),
             ],

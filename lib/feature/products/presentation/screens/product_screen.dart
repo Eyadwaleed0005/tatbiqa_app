@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tatbiqa/app/dependency_injection/service_locator.dart';
 import 'package:tatbiqa/core/helper/app_system_ui.dart';
 import 'package:tatbiqa/core/widgets/custom_app_bar.dart';
+import 'package:tatbiqa/feature/products/presentation/cubit/products_cubit.dart';
 import 'package:tatbiqa/feature/products/presentation/screens/widgets/product_screen_content.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -12,10 +15,14 @@ class ProductScreen extends StatelessWidget {
     return Scaffold(
     appBar: const CustomAppbar(),
 
-      body:AnnotatedRegion<SystemUiOverlayStyle>(
-      value: AppSystemUi.dark(),
-    
-      child:ProductScreenContent ()) ,);
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: AppSystemUi.dark(),
+        child: BlocProvider(
+          create: (context) => getIt.get<ProductsCubit>()..fetchProdcts(),
+          child: const ProductScreenContent(),
+        ),
+      ),
+    );
 
 
   }

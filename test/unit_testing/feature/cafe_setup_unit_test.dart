@@ -41,55 +41,92 @@ void main() {
   );
 
   const tFailure = LocalDatabaseFailure('Failed to save cafe');
+  const tGetFailure = LocalDatabaseFailure('Failed to get cafe data');
 
-  blocTest<CafeCubit, CafeState>(
-    'emits [CafeLoading, CafeSuccess] when saveCafeInfo is successful',
-    build: () {
-      when(
-        () => mockUseCase.saveCafeInfo(
-          cafeName: tCafeName,
-          email: tEmail,
-          ownerName: tOwnerName,
-          phone: tPhone,
-        ),
-      ).thenAnswer((_) async => const Right(tCafeEntity));
+  group('saveCafeInfo tests', () {
+    blocTest<CafeCubit, CafeState>(
+      'emits [SaveCafeDataLoading, SaveCafeDataSuccess] when saveCafeInfo is successful',
+      build: () {
+        when(
+          () => mockUseCase.saveCafeInfo(
+            cafeName: tCafeName,
+            email: tEmail,
+            ownerName: tOwnerName,
+            phone: tPhone,
+          ),
+        ).thenAnswer((_) async => const Right(tCafeEntity));
 
-      return cubit;
-    },
-    act: (cubit) => cubit.saveCafeInfo(
-      cafeName: tCafeName,
-      email: tEmail,
-      ownerName: tOwnerName,
-      phone: tPhone,
-    ),
-    expect: () => [
-      SaveCafeDataLoading(),
-      const SaveCafeDataSuccess(cafeEntity: tCafeEntity),
-    ],
-  );
+        return cubit;
+      },
+      act: (cubit) => cubit.saveCafeInfo(
+        cafeName: tCafeName,
+        email: tEmail,
+        ownerName: tOwnerName,
+        phone: tPhone,
+      ),
+      expect: () => [
+        SaveCafeDataLoading(),
+        const SaveCafeDataSuccess(cafeEntity: tCafeEntity),
+      ],
+    );
 
-  blocTest<CafeCubit, CafeState>(
-    'emits [CafeLoading, CafeError] when saveCafeInfo fails',
-    build: () {
-      when(
-        () => mockUseCase.saveCafeInfo(
-          cafeName: tCafeName,
-          email: tEmail,
-          ownerName: tOwnerName,
-          phone: tPhone,
-        ),
-      ).thenAnswer((_) async => const Left(tFailure));
-      return cubit;
-    },
-    act: (cubit) => cubit.saveCafeInfo(
-      cafeName: tCafeName,
-      email: tEmail,
-      ownerName: tOwnerName,
-      phone: tPhone,
-    ),
-    expect: () => [
-      SaveCafeDataLoading(),
-      const SaveCafeDataError(message: 'Failed to save cafe'),
-    ],
-  );
+    blocTest<CafeCubit, CafeState>(
+      'emits [SaveCafeDataLoading, SaveCafeDataError] when saveCafeInfo fails',
+      build: () {
+        when(
+          () => mockUseCase.saveCafeInfo(
+            cafeName: tCafeName,
+            email: tEmail,
+            ownerName: tOwnerName,
+            phone: tPhone,
+          ),
+        ).thenAnswer((_) async => const Left(tFailure));
+        return cubit;
+      },
+      act: (cubit) => cubit.saveCafeInfo(
+        cafeName: tCafeName,
+        email: tEmail,
+        ownerName: tOwnerName,
+        phone: tPhone,
+      ),
+      expect: () => [
+        SaveCafeDataLoading(),
+        const SaveCafeDataError(message: 'Failed to save cafe'),
+      ],
+    );
+  });
+
+  group('getCafeInfo tests', () {
+    blocTest<CafeCubit, CafeState>(
+      'emits [GetDataCafeLoading, GetDataCafeSuccess] when getCafeInfo is successful',
+      build: () {
+        when(
+          () => mockUseCase.getCafeData(),
+        ).thenAnswer((_) async => const Right(tCafeEntity));
+
+        return cubit;
+      },
+      act: (cubit) => cubit.getCafeInfo(),
+      expect: () => [
+        GetDataCafeLoading(),
+        const GetDataCafeSuccess(cafeEntity: tCafeEntity),
+      ],
+    );
+
+    blocTest<CafeCubit, CafeState>(
+      'emits [GetDataCafeLoading, GetDataCafeError] when getCafeInfo fails',
+      build: () {
+        when(
+          () => mockUseCase.getCafeData(),
+        ).thenAnswer((_) async => const Left(tGetFailure));
+
+        return cubit;
+      },
+      act: (cubit) => cubit.getCafeInfo(),
+      expect: () => [
+        GetDataCafeLoading(),
+        const GetDataCafeError(message: 'Failed to get cafe data'),
+      ],
+    );
+  });
 }
