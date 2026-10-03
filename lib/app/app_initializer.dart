@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tatbiqa/core/hive/feature/cafe_hive_setup.dart';
 import 'package:tatbiqa/core/hive/feature/product_hive_setup.dart';
 import 'package:tatbiqa/core/hive/feature/rooms_hive_setup.dart';
+import 'package:tatbiqa/core/hive/feature/sessions_hive_setup.dart';
 
 abstract final class AppInitializer {
   AppInitializer._();
@@ -28,5 +29,6 @@ abstract final class AppInitializer {
     await CafeHiveSetup.init();
     await RoomsHiveSetup.init();
     await ProductsHiveSetup.init();
+    await SessionsHiveSetup.init();
   }
 }

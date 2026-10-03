@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbiqa/app/dependency_injection/service_locator.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/widgets/app_custom_dialog.dart';
-import 'package:tatbiqa/core/widgets/custom_operation_result_dialog.dart';
+import 'package:tatbiqa/core/widgets/app_toast.dart';
 import 'package:tatbiqa/core/widgets/custom_text_form_field.dart';
 import 'package:tatbiqa/feature/rooms/presentation/cubit/add_room_cubit.dart';
 import 'package:tatbiqa/feature/rooms/presentation/cubit/add_room_state.dart';
@@ -12,7 +12,7 @@ import 'package:tatbiqa/feature/rooms/presentation/cubit/rooms_cubit.dart';
 class AddRoomDialog extends StatefulWidget {
   const AddRoomDialog({super.key});
 
-static void show(BuildContext context) {
+  static void show(BuildContext context) {
     final roomsCubit = context.read<RoomsCubit>();
 
     showDialog(
@@ -22,9 +22,7 @@ static void show(BuildContext context) {
           BlocProvider<AddRoomCubit>(
             create: (context) => getIt<AddRoomCubit>(),
           ),
-          BlocProvider<RoomsCubit>.value(
-            value: roomsCubit,
-          ),
+          BlocProvider<RoomsCubit>.value(value: roomsCubit),
         ],
         child: const AddRoomDialog(),
       ),
@@ -60,35 +58,13 @@ class _AddRoomDialogState extends State<AddRoomDialog> {
     return BlocConsumer<AddRoomCubit, AddRoomState>(
       listener: (context, state) {
         if (state is AddRoomSuccess) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (dialogContext) => CustomOperationResultDialog(
-              type: CustomOperationResultType.success,
-              title: 'تم انشاء الغرفة بنجاح',
-              message: 'تم انشاء الغرفة بنجاح',
-              actionText: 'متابعة',
-              onActionPressed: () {
-                context.read<RoomsCubit>().getRooms();
-                Navigator.of(dialogContext).pop();
-                Navigator.of(context).pop();
-              },
-            ),
-          );
+          AppToast.show(context, 'تم انشاء الغرفة بنجاح');
+          context.read<RoomsCubit>().getRooms();
+          Navigator.of(context).pop();
         } else if (state is AddRoomFailure) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (dialogContext) => CustomOperationResultDialog(
-              type: CustomOperationResultType.failure,
-              title: 'حدث خطأ',
-              message: state.errMessage,
-              actionText: 'متابعة',
-              onActionPressed: () {
-                Navigator.of(dialogContext).pop();
-              },
-            ),
-          );
+          AppToast.show(context, state.errMessage);
+
+          Navigator.of(context).pop();
         }
       },
       builder: (context, state) {

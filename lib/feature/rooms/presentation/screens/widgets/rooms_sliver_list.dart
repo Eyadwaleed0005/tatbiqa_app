@@ -104,9 +104,16 @@ class RoomsSliverList extends StatelessWidget {
               SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   final room = rooms[index];
+
+                  final activeSession = state.activeSessionsMap[room.id];
+                  final roomStats = state.roomsStatsMap[room.id];
                   return Padding(
                     padding: EdgeInsets.only(bottom: 16.h),
-                    child: RoomCardItem(room: room),
+                    child: RoomCardItem(
+                      room: room,
+                      activeSession: activeSession,
+                      roomStats: roomStats,
+                    ),
                   );
                 }, childCount: rooms.length),
               ),

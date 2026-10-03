@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
 import 'package:tatbiqa/feature/rooms/domain/entity/room_entity.dart';
+import 'package:tatbiqa/feature/sessions/domain/entity/session_entity.dart';
 
 class HelperFunctions {
   static Future<void> handleFirstButtonAction(
@@ -19,11 +21,39 @@ class HelperFunctions {
     }
   }
 
-  static void handleSecondButtonAction(bool isBusy, BuildContext context) {
+  static Future<void> handleSecondButtonAction(
+    bool isBusy,
+    BuildContext context,
+    RoomEntity room,
+  ) async {
     if (isBusy) {
       Navigator.pushNamed(context, RouteNames.sessionDetails);
     } else {
-      Navigator.pushNamed(context, RouteNames.startSession);
+      await Navigator.pushNamed(
+        context,
+        RouteNames.startSession,
+        arguments: room,
+      );
     }
+  }
+
+  static String formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    String hours = twoDigits(duration.inHours);
+    String minutes = twoDigits(duration.inMinutes.remainder(60));
+    String seconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$hours:$minutes:$seconds";
+  }
+
+  static String formatStartTime(DateTime startTime) {
+    return DateFormat('hh:mm a').format(startTime);
+  }
+
+  static double calculateCurrentTotal(SessionEntity session) {
+    Duration duration = DateTime.now().difference(session.startTime);
+    double hours = duration.inMinutes / 60.0;
+    double playstationCost = hours * session.hourlyRate;
+
+    return playstationCost + session.productsCost;
   }
 }
