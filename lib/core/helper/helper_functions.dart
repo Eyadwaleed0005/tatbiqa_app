@@ -25,9 +25,14 @@ class HelperFunctions {
     bool isBusy,
     BuildContext context,
     RoomEntity room,
+    SessionEntity? session,
   ) async {
     if (isBusy) {
-      Navigator.pushNamed(context, RouteNames.sessionDetails);
+      Navigator.pushNamed(
+        context,
+        RouteNames.sessionDetails,
+        arguments: session,
+      );
     } else {
       await Navigator.pushNamed(
         context,
@@ -46,14 +51,20 @@ class HelperFunctions {
   }
 
   static String formatStartTime(DateTime startTime) {
-    return DateFormat('hh:mm a').format(startTime);
+    String formatted = DateFormat('hh:mm a').format(startTime);
+    return formatted
+        .replaceAll('PM', 'م ')
+        .replaceAll('AM', 'ص ')
+        .replaceAll('pm', 'م ')
+        .replaceAll('am', 'ص ');
+  }
+
+  static double calculatePlayCost(SessionEntity session) {
+    final minutes = DateTime.now().difference(session.startTime).inMinutes;
+    return minutes * session.hourlyRate / 60.0;
   }
 
   static double calculateCurrentTotal(SessionEntity session) {
-    Duration duration = DateTime.now().difference(session.startTime);
-    double hours = duration.inMinutes / 60.0;
-    double playstationCost = hours * session.hourlyRate;
-
-    return playstationCost + session.productsCost;
+    return calculatePlayCost(session) + session.productsCost;
   }
 }

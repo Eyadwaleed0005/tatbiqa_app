@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
@@ -15,13 +14,7 @@ class SessionDetailsHeaderWidget extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () => Navigator.pop(context),
-          style: IconButton.styleFrom(
-            backgroundColor: ColorPalette.bgInteractive,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              side: BorderSide(color: ColorPalette.borderColor),
-            ),
-          ),
+
           icon: Icon(
             Icons.arrow_back,
             color: ColorPalette.primary,

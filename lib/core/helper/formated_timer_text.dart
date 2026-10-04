@@ -19,30 +19,17 @@ class FormattedTimerText extends StatelessWidget {
 
     final separatorStyle = baseStyle.copyWith(color: ColorPalette.amber);
 
-    if (hours > 0) {
-      return RichText(
-        text: TextSpan(
-          style: baseStyle,
-          children: [
-            TextSpan(text: "$hours"),
-            TextSpan(text: ":", style: separatorStyle),
-            TextSpan(text: twoDigits(minutes)),
-            TextSpan(text: ":", style: separatorStyle),
-            TextSpan(text: twoDigits(seconds)),
-          ],
-        ),
-      );
-    } else {
-      return RichText(
-        text: TextSpan(
-          style: baseStyle,
-          children: [
-            TextSpan(text: twoDigits(minutes)),
-            TextSpan(text: ":", style: separatorStyle),
-            TextSpan(text: twoDigits(seconds)),
-          ],
-        ),
-      );
-    }
+    return RichText(
+      text: TextSpan(
+        style: baseStyle,
+        children: [
+          TextSpan(text: "$hours"),
+          TextSpan(text: ":", style: separatorStyle),
+          TextSpan(text: twoDigits(minutes)),
+          TextSpan(text: ":", style: separatorStyle),
+          TextSpan(text: twoDigits(seconds)),
+        ],
+      ),
+    );
   }
 }

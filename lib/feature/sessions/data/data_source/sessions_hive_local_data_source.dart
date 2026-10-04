@@ -1,16 +1,9 @@
 import 'package:tatbiqa/core/hive/hive_boxes.dart';
 import 'package:tatbiqa/core/hive/local_database_service.dart';
+import 'package:tatbiqa/feature/sessions/data/data_source/session_hive_local_data_source.dart';
 import 'package:tatbiqa/feature/sessions/data/model/session_model.dart';
 
-abstract class SessionHiveLocalDataSource {
-  Future<SessionModel> startSession({
-    required int roomId,
-    required String roomName,
-    required double hourlyRate,
-  });
-  
-  Future<List<SessionModel>> getSessions();
-}
+
 
 class SessionHiveLocalDataSourceImpl implements SessionHiveLocalDataSource {
   final LocalDatabaseService hiveService;

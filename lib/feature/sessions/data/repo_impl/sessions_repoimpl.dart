@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:tatbiqa/core/error/failure.dart';
-import 'package:tatbiqa/feature/sessions/data/data_source/sessions_hive_local_data_source.dart';
+import 'package:tatbiqa/feature/sessions/data/data_source/session_hive_local_data_source.dart';
 import 'package:tatbiqa/feature/sessions/domain/entity/session_entity.dart';
 import 'package:tatbiqa/feature/sessions/domain/repo/session_repo.dart';
 

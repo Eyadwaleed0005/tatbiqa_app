@@ -6,18 +6,30 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 
 class SummaryCheckoutSessionDetailsCard extends StatelessWidget {
-  const SummaryCheckoutSessionDetailsCard({super.key});
+  final double playCost;
+  final double productsCost;
+
+  final double total;
+  const SummaryCheckoutSessionDetailsCard({
+    super.key,
+    required this.playCost,
+    required this.productsCost,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
     return CustomAppCard(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("لحظي", style: AppTextStyle.fontReadexPro10RegularGrayColor),
+              Text(
+                "لحظي",
+                style: AppTextStyle.fontReadexPro10RegularPrimaryColor,
+              ),
               Text(
                 "ملخص الحساب",
                 style: AppTextStyle.fontCairo18BoldWhiteColor,
@@ -29,7 +41,7 @@ class SummaryCheckoutSessionDetailsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "85.00 ج.م",
+                "${playCost.toStringAsFixed(2)} ج.م",
                 style: AppTextStyle.fontReadexPro14SemiBoldWhiteColor,
               ),
               Text(
@@ -42,7 +54,10 @@ class SummaryCheckoutSessionDetailsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("0 ج", style: AppTextStyle.fontReadexPro14SemiBoldAmberColor),
+              Text(
+                "ج ${productsCost.toStringAsFixed(2)} ",
+                style: AppTextStyle.fontReadexPro14SemiBoldAmberColor,
+              ),
               Text(
                 "الطلبات والمشروبات",
                 style: AppTextStyle.fontReadexPro14RegularGrayColor,
@@ -56,7 +71,10 @@ class SummaryCheckoutSessionDetailsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("ج.م85", style: AppTextStyle.fontCairo28BoldPrimaryColor),
+              Text(
+                " ج.م ${total.toStringAsFixed(2)}",
+                style: AppTextStyle.fontCairo28BoldPrimaryColor,
+              ),
               Text(
                 "الإجمالي الحالي",
                 style: AppTextStyle.fontCairo18BoldWhiteColor,

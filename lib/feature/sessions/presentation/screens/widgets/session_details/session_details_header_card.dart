@@ -6,11 +6,17 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 
 class SessionDetailsHeaderCard extends StatelessWidget {
+  final String roomName;
+  final String startTime;
+  final double hourlyRate;
   final String statusText;
   final IconData roomIcon;
+
   const SessionDetailsHeaderCard({
     super.key,
-
+    required this.roomName,
+    required this.startTime,
+    required this.hourlyRate,
     this.statusText = "مباشر",
     this.roomIcon = Icons.sports_esports,
   });
@@ -48,17 +54,26 @@ class SessionDetailsHeaderCard extends StatelessWidget {
               ],
             ),
           ),
-
           Row(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text( "غرفة 02", style: AppTextStyle.fontCairo24BoldWhiteColor),
+                  Text(roomName, style: AppTextStyle.fontCairo24BoldWhiteColor),
                   verticalSpace(4),
-                  Text(
-                    "بدأ 08:15 م  70 ج.م/ساعة",
-                    style: AppTextStyle.fontCairo12SemiBoldGrayColor,
+                  Row(
+                    children: [
+                      Text(
+                        "ج.م/ساعة ${hourlyRate.toStringAsFixed(0)} ",
+                        style: AppTextStyle.fontCairo12SemiBoldPrimaryColor,
+                      ),
+                      horizontalSpace(10),
+
+                      Text(
+                        "بدأ $startTime ",
+                        style: AppTextStyle.fontCairo12SemiBoldGrayColor,
+                      ),
+                    ],
                   ),
                 ],
               ),
