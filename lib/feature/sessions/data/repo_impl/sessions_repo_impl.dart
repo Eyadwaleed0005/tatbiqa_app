@@ -35,4 +35,16 @@ class SessionRepoImpl implements SessionRepo {
       return left(LocalDatabaseFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, SessionEntity>> endSession({required int sessionId, required double playstationCost, required double productsCost, required double totalCost, required int durationMinutes})async {
+  try {
+      final sessions = await localDataSource.endSession(sessionId: sessionId,playstationCost: playstationCost,
+      productsCost: productsCost,totalCost: totalCost,durationMinutes: durationMinutes
+      );
+      return right(sessions);
+    } catch (e) {
+      return left(LocalDatabaseFailure(e.toString()));
+    }
+  }
 }

@@ -34,4 +34,27 @@ class SessionsCubit extends Cubit<SessionsState> {
       (sessions) => emit(FetchSessionsSuccess(sessions)),
     );
   }
+
+  Future<void> endSession({
+  required int sessionId,
+  required double playstationCost,
+  required double productsCost,
+  required double totalCost,
+  required int durationMinutes,
+}) async {
+  emit(SessionsLoading());
+  
+  final result = await sessionUseCase.endSession(
+    sessionId: sessionId,
+    playstationCost: playstationCost,
+    productsCost: productsCost,
+    totalCost: totalCost,
+    durationMinutes: durationMinutes,
+  );
+
+  result.fold(
+    (failure) => emit(SessionsError(failure.message)),
+    (session) => emit(SessionCheckoutSuccess(session)), 
+  );
+}
 }

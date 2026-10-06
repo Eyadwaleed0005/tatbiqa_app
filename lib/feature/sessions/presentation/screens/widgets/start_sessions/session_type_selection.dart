@@ -4,7 +4,8 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sessions/session_type_card.dart';
 
 class SessionTypeSelection extends StatefulWidget {
-  const SessionTypeSelection({super.key});
+  final ValueChanged<bool> onTypeChanged;
+  const SessionTypeSelection({super.key, required this.onTypeChanged});
 
   @override
   State<SessionTypeSelection> createState() => _SessionTypeSelectionState();
@@ -41,7 +42,10 @@ class _SessionTypeSelectionState extends State<SessionTypeSelection> {
                 title: "فردي",
                 icon: Icons.person_outline,
                 isSelected: isIndividual,
-                onTap: () => setState(() => isIndividual = true),
+                onTap: () {
+                  setState(() => isIndividual = true);
+                  widget.onTypeChanged(true);
+                },
               ),
             ),
             horizontalSpace(16),
@@ -50,7 +54,10 @@ class _SessionTypeSelectionState extends State<SessionTypeSelection> {
                 title: "زوجي",
                 icon: Icons.people_outline,
                 isSelected: !isIndividual,
-                onTap: () => setState(() => isIndividual = false),
+                onTap: () {
+                  setState(() => isIndividual = false);
+                  widget.onTypeChanged(false);
+                },
               ),
             ),
           ],

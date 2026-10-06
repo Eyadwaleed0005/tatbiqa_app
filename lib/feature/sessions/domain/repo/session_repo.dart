@@ -9,5 +9,12 @@ abstract class SessionRepo {
     required double hourlyRate,
   });
 Future<Either<Failure, List<SessionEntity>>> getSessions();
-  
+
+  Future<Either<Failure, SessionEntity>> endSession({
+    required int sessionId,
+  required double playstationCost,
+  required double productsCost,
+  required double totalCost,
+  required int durationMinutes,
+  });
 }

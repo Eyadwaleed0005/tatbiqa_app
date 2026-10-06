@@ -1,0 +1,62 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'session_product_model.dart';
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class SessionProductModelAdapter extends TypeAdapter<SessionProductEntity> {
+  @override
+  final int typeId = 4;
+
+  @override
+  SessionProductEntity read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return SessionProductEntity(
+      id: fields[0] as int?,
+      sessionId: fields[1] as int,
+      productId: fields[2] as int,
+      productName: fields[3] as String,
+      unitPrice: fields[4] as double,
+      quantity: fields[5] as int,
+      totalPrice: fields[6] as double,
+      createdAt: fields[7] as DateTime,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, SessionProductEntity obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.sessionId)
+      ..writeByte(2)
+      ..write(obj.productId)
+      ..writeByte(3)
+      ..write(obj.productName)
+      ..writeByte(4)
+      ..write(obj.unitPrice)
+      ..writeByte(5)
+      ..write(obj.quantity)
+      ..writeByte(6)
+      ..write(obj.totalPrice)
+      ..writeByte(7)
+      ..write(obj.createdAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SessionProductModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

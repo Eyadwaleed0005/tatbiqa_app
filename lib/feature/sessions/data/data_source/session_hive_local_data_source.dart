@@ -6,6 +6,14 @@ abstract class SessionHiveLocalDataSource {
     required String roomName,
     required double hourlyRate,
   });
-  
+
   Future<List<SessionModel>> getSessions();
+
+  Future<SessionModel> endSession({
+    required int sessionId,
+    required double playstationCost,
+    required double productsCost,
+    required double totalCost,
+    required int durationMinutes,
+  });
 }

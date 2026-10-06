@@ -71,9 +71,11 @@ class SummaryCheckoutSessionDetailsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                " ج.م ${total.toStringAsFixed(2)}",
-                style: AppTextStyle.fontCairo28BoldPrimaryColor,
+              Expanded(
+                child: Text(
+                  " ج.م ${total.toStringAsFixed(2)}",
+                  style: AppTextStyle.fontCairo24BoldPrimaryColor,
+                ),
               ),
               Text(
                 "الإجمالي الحالي",

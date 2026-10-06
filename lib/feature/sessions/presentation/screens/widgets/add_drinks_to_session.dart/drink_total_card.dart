@@ -4,7 +4,7 @@ import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
 
 class DrinkTotalCard extends StatelessWidget {
-  final int totalAmount;
+  final double totalAmount;
 
   const DrinkTotalCard({super.key, required this.totalAmount});
 

@@ -199,6 +199,7 @@ class _RoomCardItemState extends State<RoomCardItem> {
                           isBusy,
                           context,
                           widget.room,
+                          widget.activeSession,
                         );
                         if (context.mounted) {
                           context.read<RoomsCubit>().getRooms();

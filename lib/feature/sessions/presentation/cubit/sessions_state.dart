@@ -30,6 +30,14 @@ class FetchSessionsSuccess extends SessionsState {
   List<Object?> get props => [sessions];
 }
 
+class SessionCheckoutSuccess extends SessionsState {
+  final SessionEntity sessions;
+
+  const SessionCheckoutSuccess(this.sessions);
+
+  @override
+  List<Object?> get props => [sessions];
+}
 
 class SessionsError extends SessionsState {
   final String message;

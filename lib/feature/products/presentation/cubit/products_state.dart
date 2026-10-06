@@ -15,6 +15,9 @@ final class ProductsSuccess extends ProductsState {
   final List<ProductEntity> productEntity;
 
   const ProductsSuccess({required this.productEntity});
+   List<ProductEntity> get available =>
+      productEntity.where((p) => p.isAvailable).toList();
+
   @override
   List<Object> get props => [productEntity];
 }

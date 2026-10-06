@@ -14,10 +14,17 @@ import 'package:tatbiqa/feature/sessions/presentation/cubit/sessions_state.dart'
 import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sessions/session_type_selection.dart';
 import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/start_sessions/start_session_header_section.dart';
 
-class StartSessionContent extends StatelessWidget {
+class StartSessionContent extends StatefulWidget {
   final RoomEntity room; 
 
   const StartSessionContent({super.key, required this.room});
+
+  @override
+  State<StartSessionContent> createState() => _StartSessionContentState();
+}
+
+class _StartSessionContentState extends State<StartSessionContent> {
+  bool isIndividual = true; 
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,7 @@ class StartSessionContent extends StatelessWidget {
       listener: (context, state) {
         if (state is SessionStartedSuccess) {
           AppToast.show(context, "تم بدء السيشن بنجاح");
-Navigator.pop(context);         
+          Navigator.pop(context);         
         } else if (state is SessionsError) {
           AppToast.show(context, state.message);
         }
@@ -53,8 +60,7 @@ Navigator.pop(context);
                               children: [
                                 Text(
                                   "متاحة",
-                                  style: AppTextStyle
-                                      .fontReadexPro14MediumPrimaryColor,
+                                  style: AppTextStyle.fontReadexPro14MediumPrimaryColor,
                                 ),
                                 horizontalSpace(6),
                                 Container(
@@ -68,7 +74,7 @@ Navigator.pop(context);
                               ],
                             ),
                             Text(
-                              room.name,
+                              widget.room.name,
                               style: AppTextStyle.fontCairo18SemiBoldWhiteColor,
                             ),
                           ],
@@ -77,7 +83,7 @@ Navigator.pop(context);
                         Align(
                           alignment: Alignment.centerRight,
                           child: Text(
-                            "سعر الساعة: ${room.hourlyRate} ج.م  •  جاهزة لبدء سيشن",
+                            "سعر الساعة: ${widget.room.hourlyRate} ج.م  •  جاهزة لبدء سيشن",
                             style: AppTextStyle.fontReadexPro14RegularGrayColor,
                           ),
                         ),
@@ -85,7 +91,15 @@ Navigator.pop(context);
                     ),
                   ),
                   verticalSpace(24),
-                  const SessionTypeSelection(),
+                  
+                  SessionTypeSelection(
+                    onTypeChanged: (bool value) {
+                      setState(() {
+                        isIndividual = value;
+                      });
+                    },
+                  ),
+                  
                   verticalSpace(200),
                   Center(
                     child: Text(
@@ -101,10 +115,14 @@ Navigator.pop(context);
                       onPressed: () {
                         if (isLoading) return;
 
+                        double finalHourlyRate = isIndividual 
+                            ? widget.room.hourlyRate 
+                            : widget.room.hourlyRate * 2;
+
                         context.read<SessionsCubit>().startSession(
-                          roomId: room.id,
-                          roomName: room.name,
-                          hourlyRate: room.hourlyRate,
+                          roomId: widget.room.id,
+                          roomName: widget.room.name,
+                          hourlyRate: finalHourlyRate, 
                         );
                       },
                     ),

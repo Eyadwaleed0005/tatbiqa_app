@@ -22,4 +22,20 @@ class SessionUseCase {
   Future<Either<Failure, List<SessionEntity>>> getSessions() {
     return repo.getSessions();
   }
+  
+  Future<Either<Failure, SessionEntity>> endSession({
+     required int sessionId,
+  required double playstationCost,
+  required double productsCost,
+  required double totalCost,
+  required int durationMinutes,
+  }) {
+    return repo.endSession(
+     sessionId: sessionId,
+     playstationCost: playstationCost,
+     productsCost: productsCost,
+     totalCost: totalCost,
+     durationMinutes: durationMinutes
+    );
+  }
 }

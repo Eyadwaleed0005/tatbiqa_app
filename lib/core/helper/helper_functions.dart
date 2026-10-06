@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
 import 'package:tatbiqa/feature/rooms/domain/entity/room_entity.dart';
+import 'package:tatbiqa/feature/rooms/presentation/cubit/rooms_cubit.dart';
 import 'package:tatbiqa/feature/sessions/domain/entity/session_entity.dart';
 
 class HelperFunctions {
   static Future<void> handleFirstButtonAction(
     bool isBusy,
     BuildContext context,
-    RoomEntity room,
-  ) async {
+    RoomEntity room, [
+    SessionEntity? session,
+  ]) async {
     if (isBusy) {
-      Navigator.pushNamed(context, RouteNames.addDrinksToSession);
+      if (session == null) return;
+      await Navigator.pushNamed(
+        context,
+        RouteNames.addDrinksToSession,
+        arguments: session,
+      );
     } else {
       await Navigator.pushNamed(
         context,
@@ -33,6 +41,9 @@ class HelperFunctions {
         RouteNames.sessionDetails,
         arguments: session,
       );
+      if (context.mounted) {
+        context.read<RoomsCubit>().getRooms();
+      }
     } else {
       await Navigator.pushNamed(
         context,

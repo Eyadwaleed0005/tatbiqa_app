@@ -47,6 +47,21 @@ class HiveDatabaseService implements LocalDatabaseService {
     );
   }
 
+@override
+Future<void> putAll<T>({
+  required String boxName,
+  required Map<dynamic, T> entries,
+}) async {
+  return _execute(
+    operation: 'PUT ALL',
+    boxName: boxName,
+    requestData: {'count': entries.length},
+    action: () async {
+      final box = await _getBox<T>(boxName);
+      await box.putAll(entries);
+    },
+  );
+}
   @override
   Future<void> putData<T>({
     required String boxName,

@@ -10,6 +10,10 @@ abstract class LocalDatabaseService {
     required dynamic key,
     required T value,
   });
+  Future<void> putAll<T>({
+  required String boxName,
+  required Map<dynamic, T> entries,
+});
 
   Future<void> addData<T>({required String boxName, required T value});
 
