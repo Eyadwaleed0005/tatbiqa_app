@@ -9,7 +9,6 @@ import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_outlined_button.dart';
 import 'package:tatbiqa/feature/products/domain/entity/products_entity.dart';
 import 'package:tatbiqa/feature/products/presentation/cubit/products_cubit.dart';
-import 'package:tatbiqa/feature/rooms/presentation/cubit/rooms_cubit.dart';
 import 'package:tatbiqa/feature/sessions/domain/entity/session_entity.dart';
 import 'package:tatbiqa/feature/sessions/presentation/cubit/session_product_cubit/drinks_selection_cubit.dart';
 import 'package:tatbiqa/feature/sessions/presentation/cubit/session_product_cubit/session_product_cubit.dart';
@@ -23,14 +22,15 @@ class AddDrinksToSessionContent extends StatelessWidget {
   const AddDrinksToSessionContent({super.key, required this.session});
 
   List<ProductEntity> _availableProducts(BuildContext context) {
-     final state = context.read<ProductsCubit>().state;
-  return state is ProductsSuccess ? state.available : [];
+    final state = context.read<ProductsCubit>().state;
+    return state is ProductsSuccess ? state.available : [];
   }
 
   void _submit(BuildContext context) {
-    final items = context
-        .read<DrinksSelectionCubit>()
-        .buildItems(session.id, _availableProducts(context));
+    final items = context.read<DrinksSelectionCubit>().buildItems(
+      session.id,
+      _availableProducts(context),
+    );
 
     if (items.isEmpty) {
       AppToast.show(context, 'اختر منتج واحد على الأقل');
@@ -45,7 +45,6 @@ class AddDrinksToSessionContent extends StatelessWidget {
       listener: (context, state) {
         if (state is SessionProductAdded) {
           context.read<DrinksSelectionCubit>().reset();
-          context.read<RoomsCubit>().getRooms();
           Navigator.pop(context);
         } else if (state is SessionProductError) {
           AppToast.show(context, state.message);
@@ -95,9 +94,9 @@ class AddDrinksToSessionContent extends StatelessWidget {
                   BlocBuilder<DrinksSelectionCubit, DrinksSelectionState>(
                     builder: (context, _) {
                       context.watch<ProductsCubit>();
-                      final total = context
-                          .read<DrinksSelectionCubit>()
-                          .total(_availableProducts(context));
+                      final total = context.read<DrinksSelectionCubit>().total(
+                        _availableProducts(context),
+                      );
                       return DrinkTotalCard(totalAmount: total);
                     },
                   ),

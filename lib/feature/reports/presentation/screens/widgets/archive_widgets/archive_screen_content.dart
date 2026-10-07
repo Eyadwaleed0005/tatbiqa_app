@@ -7,7 +7,6 @@ import 'package:tatbiqa/feature/reports/data/model/analytics_item_model.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/archive_widgets/archive_header_section.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/custom_analytics_grid.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/custom_tabs_widget.dart';
-import 'package:tatbiqa/feature/reports/presentation/screens/widgets/room_performance_widget.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/room_summry_widget.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/total_play_time_widget.dart';
 
@@ -87,14 +86,14 @@ class _ArchiveScreenContent extends State<ArchiveScreenContent> {
               ),
               verticalSpace(8),
 
-              const RoomPerformanceWidget(
-                roomName: "غرفة 01",
-                sessionsCount: "8",
-                totalMinutes: "360",
-                playIncome: "500 لعب",
-                productsIncome: "150 منتجات",
-                totalIncome: "650 إجمالي",
-              ),
+              // const RoomPerformanceWidget(
+              //   roomName: "غرفة 01",
+              //   sessionsCount: "8",
+              //   totalMinutes: "360",
+              //   playIncome: "500 لعب",
+              //   productsIncome: "150 منتجات",
+              //   totalIncome: "650 إجمالي",
+              // ),
             ],
           ),
         ),
