@@ -50,91 +50,111 @@ class AddDrinksToSessionContent extends StatelessWidget {
           AppToast.show(context, state.message);
         }
       },
-      child: AppAnimations.screenSection(
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate([
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${session.roomName} · سيشن شغّال',
-                        style: AppTextStyle.fontReadexPro12MediumPrimaryColor,
-                      ),
-                      Text(
-                        'إضافة طلبات',
-                        style: AppTextStyle.fontCairo24BoldWhiteColor,
-                      ),
-                    ],
+      child: BlocBuilder<ProductsCubit, ProductsState>(
+        builder: (context, productsState) {
+          final isEmpty =
+              productsState is ProductsSuccess &&
+              productsState.available.isEmpty;
+
+          return AppAnimations.screenSection(
+            child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 12.h,
                   ),
-                  verticalSpace(12),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'اختر الكمية ثم أضفها إلى الحساب الحالي',
-                      style: AppTextStyle.fontReadexPro14RegularGrayColor,
-                    ),
-                  ),
-                  verticalSpace(12),
-                ]),
-              ),
-            ),
-
-            const DrinksList(),
-
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate([
-                  verticalSpace(8),
-                  BlocBuilder<DrinksSelectionCubit, DrinksSelectionState>(
-                    builder: (context, _) {
-                      context.watch<ProductsCubit>();
-                      final total = context.read<DrinksSelectionCubit>().total(
-                        _availableProducts(context),
-                      );
-                      return DrinkTotalCard(totalAmount: total);
-                    },
-                  ),
-
-                  verticalSpace(8),
-
-                  BlocBuilder<SessionProductCubit, SessionProductState>(
-                    builder: (context, state) {
-                      final isLoading = state is SessionProductLoading;
-                      return SizedBox(
-                        width: double.infinity,
-                        child: CustomElevatedButton(
-                          text: isLoading
-                              ? 'جاري الإضافة...'
-                              : 'إضافة إلى السيشن',
-                          onPressed: isLoading ? () {} : () => _submit(context),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      if (isEmpty)
+                        Center(
+                          child: Text(
+                            'إضافة طلبات',
+                            style: AppTextStyle.fontCairo24BoldWhiteColor,
+                          ),
+                        )
+                      else ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${session.roomName} · سيشن شغّال',
+                              style: AppTextStyle
+                                  .fontReadexPro12MediumPrimaryColor,
+                            ),
+                            Text(
+                              'إضافة طلبات',
+                              style: AppTextStyle.fontCairo24BoldWhiteColor,
+                            ),
+                          ],
                         ),
-                      );
-                    },
+                        verticalSpace(12),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            'اختر الكمية ثم أضفها إلى الحساب الحالي',
+                            style: AppTextStyle.fontReadexPro14RegularGrayColor,
+                          ),
+                        ),
+                        verticalSpace(12),
+                      ],
+                    ]),
                   ),
+                ),
 
-                  verticalSpace(80),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: SizedBox(
-                      width: 120.w,
-                      child: CustomOutlinedButton(
-                        text: 'رجوع',
-                        onPressed: () => Navigator.pop(context),
-                      ),
+                const DrinksList(),
+
+                if (!isEmpty)
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate([
+                        verticalSpace(8),
+                        BlocBuilder<DrinksSelectionCubit, DrinksSelectionState>(
+                          builder: (context, _) {
+                            final total = context
+                                .read<DrinksSelectionCubit>()
+                                .total(_availableProducts(context));
+                            return DrinkTotalCard(totalAmount: total);
+                          },
+                        ),
+                        verticalSpace(8),
+                        BlocBuilder<SessionProductCubit, SessionProductState>(
+                          builder: (context, state) {
+                            final isLoading = state is SessionProductLoading;
+                            return SizedBox(
+                              width: double.infinity,
+                              child: CustomElevatedButton(
+                                text: isLoading
+                                    ? 'جاري الإضافة...'
+                                    : 'إضافة إلى السيشن',
+                                onPressed: isLoading
+                                    ? () {}
+                                    : () => _submit(context),
+                              ),
+                            );
+                          },
+                        ),
+                        verticalSpace(80),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            width: 120.w,
+                            child: CustomOutlinedButton(
+                              text: 'رجوع',
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ),
+                        ),
+                        verticalSpace(16),
+                      ]),
                     ),
                   ),
-                  verticalSpace(16),
-                ]),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

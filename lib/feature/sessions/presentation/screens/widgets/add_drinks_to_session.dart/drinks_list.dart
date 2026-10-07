@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
+import 'package:tatbiqa/core/widgets/empty_or_error_state.dart';
 import 'package:tatbiqa/feature/products/presentation/cubit/products_cubit.dart';
 import 'package:tatbiqa/feature/sessions/presentation/cubit/session_product_cubit/drinks_selection_cubit.dart';
 import 'package:tatbiqa/feature/sessions/presentation/screens/widgets/add_drinks_to_session.dart/drink_list_item.dart';
@@ -23,23 +24,27 @@ class DrinksList extends StatelessWidget {
             ),
           );
         }
+
         if (productsState is ProductsFailure) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Text(productsState.error,
-                  style:  TextStyle(color: ColorPalette.error)),
+              child: Text(
+                productsState.error,
+                style: TextStyle(color: ColorPalette.error),
+              ),
             ),
           );
         }
+
         if (productsState is ProductsSuccess) {
-          final products =
-              productsState.available;
+          final products = productsState.available;
 
           if (products.isEmpty) {
-            return const SliverToBoxAdapter(
-              child: Center(
-                child: Text('لا توجد منتجات متاحة',
-                    style: TextStyle(color: ColorPalette.whiteColor)),
+            return const SliverFillRemaining(
+              hasScrollBody: false,
+              child: EmptyOrErrorState(
+                title: 'لا توجد مشروبات',
+                description: 'لا توجد منتجات متاحة حاليا',
               ),
             );
           }
@@ -67,6 +72,7 @@ class DrinksList extends StatelessWidget {
             },
           );
         }
+
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

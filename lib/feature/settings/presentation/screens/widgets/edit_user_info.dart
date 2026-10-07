@@ -59,11 +59,11 @@ class _EditUserInfoState extends State<EditUserInfo> {
         } else if (state is SaveCafeDataSuccess) {
           _fillFields(state.cafeEntity);
           setState(() => _isEditing = false);
-         AppToast.show(
-      context,
-      "تم حفظ بيانات المحل بنجاح",
-      type: ToastType.success,
-    );
+          AppToast.show(
+            context,
+            "تم حفظ بيانات المحل بنجاح",
+            type: ToastType.success,
+          );
         } else if (state is SaveCafeDataError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -100,59 +100,53 @@ class _EditUserInfoState extends State<EditUserInfo> {
                 ],
               ),
               verticalSpace(16),
-              if (isLoadingData)
-                const Padding(
-                  padding: EdgeInsets.all(24),
-                  child: CircularProgressIndicator(),
-                )
-              else ...[
-                CustomTextFormField(
-                  controller: _storeNameController,
-                  labelText: "اسم المحل",
-                  hintText: "ELHAMOUL CITY",
-                  enabled: _isEditing,
-                ),
-                verticalSpace(12),
-                CustomTextFormField(
-                  controller: _emailController,
-                  labelText: "البريد الالكتروني",
-                  hintText: "ghorab@gmail.com",
-                  keyboardType: TextInputType.emailAddress,
-                  enabled: _isEditing,
-                ),
-                verticalSpace(12),
-                CustomTextFormField(
-                  controller: _ownerNameController,
-                  labelText: "اسم صاحب المحل",
-                  hintText: "Eyad waleed",
-                  enabled: _isEditing,
-                ),
-                verticalSpace(12),
-                CustomTextFormField(
-                  controller: _phoneController,
-                  labelText: "رقم التليفون",
-                  hintText: "010********",
-                  keyboardType: TextInputType.phone,
-                  enabled: _isEditing,
-                ),
-                verticalSpace(20),
-                if (_isEditing)
-                  SizedBox(
-                    width: double.infinity,
-                    child: CustomElevatedButton(
-                      text: isSaving ? "جاري الحفظ..." : "حفظ",
-                      onPressed: () {
-                        if (isSaving) return;
-                        context.read<CafeCubit>().saveCafeInfo(
-                          cafeName: _storeNameController.text.trim(),
-                          email: _emailController.text.trim(),
-                          ownerName: _ownerNameController.text.trim(),
-                          phone: _phoneController.text.trim(),
-                        );
-                      },
-                    ),
+
+              CustomTextFormField(
+                controller: _storeNameController,
+                labelText: "اسم المحل",
+                hintText: "ELHAMOUL CITY",
+                enabled: _isEditing,
+              ),
+              verticalSpace(12),
+              CustomTextFormField(
+                controller: _emailController,
+                labelText: "البريد الالكتروني",
+                hintText: "ghorab@gmail.com",
+                keyboardType: TextInputType.emailAddress,
+                enabled: _isEditing,
+              ),
+              verticalSpace(12),
+              CustomTextFormField(
+                controller: _ownerNameController,
+                labelText: "اسم صاحب المحل",
+                hintText: "Eyad waleed",
+                enabled: _isEditing,
+              ),
+              verticalSpace(12),
+              CustomTextFormField(
+                controller: _phoneController,
+                labelText: "رقم التليفون",
+                hintText: "010********",
+                keyboardType: TextInputType.phone,
+                enabled: _isEditing,
+              ),
+              verticalSpace(20),
+              if (_isEditing)
+                SizedBox(
+                  width: double.infinity,
+                  child: CustomElevatedButton(
+                    text: isSaving ? "جاري الحفظ..." : "حفظ",
+                    onPressed: () {
+                      if (isSaving) return;
+                      context.read<CafeCubit>().saveCafeInfo(
+                        cafeName: _storeNameController.text.trim(),
+                        email: _emailController.text.trim(),
+                        ownerName: _ownerNameController.text.trim(),
+                        phone: _phoneController.text.trim(),
+                      );
+                    },
                   ),
-              ],
+                ),
             ],
           ),
         );
