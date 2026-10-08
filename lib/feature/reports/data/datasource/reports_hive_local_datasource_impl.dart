@@ -1,15 +1,13 @@
 import 'package:hive/hive.dart';
 import 'package:tatbiqa/core/hive/hive_boxes.dart';
-import 'package:tatbiqa/feature/reports/data/datasource/dashboard_hive_local_data_source.dart';
-import 'package:tatbiqa/feature/reports/domain/entity/dashboard_entity.dart';
+import 'package:tatbiqa/feature/reports/data/datasource/reports_hive_local_data_source.dart';
+import 'package:tatbiqa/feature/reports/domain/entity/reports_entity.dart';
 import 'package:tatbiqa/feature/rooms/data/models/room_model.dart';
 import 'package:tatbiqa/feature/sessions/data/model/session_model.dart';
 
-
-
-class DashboardLocalDataSourceImpl implements DashboardLocalDataSource {
+class DashboardLocalDataSourceImpl implements ReportsLocalDataSource {
   @override
-  Future<DashboardEntity> getDashboardReport({
+  Future<ReportsEntity> getReports({
     required bool isDaily,
     required DateTime targetDate,
   }) async {
@@ -44,23 +42,29 @@ class DashboardLocalDataSourceImpl implements DashboardLocalDataSource {
       totalPlayMinutes += session.durationMinutes ?? 0;
 
       final roomId = session.roomId;
-      roomStats.putIfAbsent(roomId, () => {
-            'name': roomsMap[roomId] ?? session.roomName,
-            'sessionsCount': 0,
-            'totalMinutes': 0,
-            'playIncome': 0.0,
-            'productsIncome': 0.0,
-            'totalIncome': 0.0,
-          });
+      roomStats.putIfAbsent(
+        roomId,
+        () => {
+          'name': roomsMap[roomId] ?? session.roomName,
+          'sessionsCount': 0,
+          'totalMinutes': 0,
+          'playIncome': 0.0,
+          'productsIncome': 0.0,
+          'totalIncome': 0.0,
+        },
+      );
 
       roomStats[roomId]!['sessionsCount'] =
           (roomStats[roomId]!['sessionsCount'] as int) + 1;
       roomStats[roomId]!['totalMinutes'] =
-          (roomStats[roomId]!['totalMinutes'] as int) + (session.durationMinutes ?? 0);
+          (roomStats[roomId]!['totalMinutes'] as int) +
+          (session.durationMinutes ?? 0);
       roomStats[roomId]!['playIncome'] =
-          (roomStats[roomId]!['playIncome'] as double) + session.playstationCost;
+          (roomStats[roomId]!['playIncome'] as double) +
+          session.playstationCost;
       roomStats[roomId]!['productsIncome'] =
-          (roomStats[roomId]!['productsIncome'] as double) + session.productsCost;
+          (roomStats[roomId]!['productsIncome'] as double) +
+          session.productsCost;
       roomStats[roomId]!['totalIncome'] =
           (roomStats[roomId]!['totalIncome'] as double) + session.totalCost;
     }
@@ -73,16 +77,28 @@ class DashboardLocalDataSourceImpl implements DashboardLocalDataSource {
 
     if (roomStats.isNotEmpty) {
       var sortedByRev = roomStats.entries.toList()
-        ..sort((a, b) => (b.value['totalIncome'] as double).compareTo(a.value['totalIncome'] as double));
+        ..sort(
+          (a, b) => (b.value['totalIncome'] as double).compareTo(
+            a.value['totalIncome'] as double,
+          ),
+        );
 
       var sortedByTime = roomStats.entries.toList()
-        ..sort((a, b) => (b.value['totalMinutes'] as int).compareTo(a.value['totalMinutes'] as int));
+        ..sort(
+          (a, b) => (b.value['totalMinutes'] as int).compareTo(
+            a.value['totalMinutes'] as int,
+          ),
+        );
 
-      topRevRoom = "${sortedByRev.first.value['name']} — ${sortedByRev.first.value['totalIncome'].toStringAsFixed(0)} ج.م";
-      leastRevRoom = "${sortedByRev.last.value['name']} — ${sortedByRev.last.value['totalIncome'].toStringAsFixed(0)} ج.م";
+      topRevRoom =
+          "${sortedByRev.first.value['name']} — ${sortedByRev.first.value['totalIncome'].toStringAsFixed(0)} ج.م";
+      leastRevRoom =
+          "${sortedByRev.last.value['name']} — ${sortedByRev.last.value['totalIncome'].toStringAsFixed(0)} ج.م";
 
-      topTimeRoom = "${sortedByTime.first.value['name']} — ${sortedByTime.first.value['totalMinutes']} دقيقة";
-      leastTimeRoom = "${sortedByTime.last.value['name']} — ${sortedByTime.last.value['totalMinutes']} دقيقة";
+      topTimeRoom =
+          "${sortedByTime.first.value['name']} — ${sortedByTime.first.value['totalMinutes']} دقيقة";
+      leastTimeRoom =
+          "${sortedByTime.last.value['name']} — ${sortedByTime.last.value['totalMinutes']} دقيقة";
 
       for (var entry in roomStats.entries) {
         roomsPerformanceList.add(
@@ -98,7 +114,7 @@ class DashboardLocalDataSourceImpl implements DashboardLocalDataSource {
       }
     }
 
-    return DashboardEntity(
+    return ReportsEntity(
       totalIncome: totalIncome,
       playstationIncome: playstationIncome,
       productsIncome: productsIncome,

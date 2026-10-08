@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
@@ -6,9 +5,10 @@ import 'package:tatbiqa/core/widgets/empty_or_error_state.dart';
 import 'package:tatbiqa/feature/reports/presentation/screens/widgets/dashboard_widgets/dashboard_header.dart';
 
 class ErrorView extends StatelessWidget {
-  const ErrorView({super.key, required this.message});
+  const ErrorView({super.key, required this.message, this.header});
 
   final String message;
+  final Widget? header;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ErrorView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const DashboardHeader(isCentered: true),
+             header?? DashboardHeader(isCentered: true),
             verticalSpace(30),
             Expanded(
               child: EmptyOrErrorState(

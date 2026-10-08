@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:tatbiqa/feature/reports/data/datasource/dashboard_hive_local_data_source.dart';
-import 'package:tatbiqa/feature/reports/data/datasource/dashboard_hive_local_datasource_impl.dart';
-import 'package:tatbiqa/feature/reports/data/repo_impl/dashboard_repo_impl.dart';
-import 'package:tatbiqa/feature/reports/domain/repo/dashboard_repo.dart';
-import 'package:tatbiqa/feature/reports/domain/usecase/dashboard_usecase.dart';
-import 'package:tatbiqa/feature/reports/presentation/cubit/dashboard_cubit.dart';
+import 'package:tatbiqa/feature/reports/data/datasource/reports_hive_local_data_source.dart';
+import 'package:tatbiqa/feature/reports/data/datasource/reports_hive_local_datasource_impl.dart';
+import 'package:tatbiqa/feature/reports/data/repo_impl/reports_repo_impl.dart';
+import 'package:tatbiqa/feature/reports/domain/repo/reports_repo.dart';
+import 'package:tatbiqa/feature/reports/domain/usecase/reports_usecase.dart';
+import 'package:tatbiqa/feature/reports/presentation/cubit/reports_cubit.dart';
 
 void registerDashboardDependencies(GetIt getIt) {
   _registerLocalDataSources(getIt);
@@ -14,25 +14,25 @@ void registerDashboardDependencies(GetIt getIt) {
 }
 
 void _registerLocalDataSources(GetIt getIt) {
-  getIt.registerLazySingleton<DashboardLocalDataSource>(
+  getIt.registerLazySingleton<ReportsLocalDataSource>(
     () => DashboardLocalDataSourceImpl(),
   );
 }
 
 void _registerRepositories(GetIt getIt) {
-  getIt.registerLazySingleton<DashboardRepo>(
-    () => DashboardRepoImpl(localDataSource: getIt<DashboardLocalDataSource>()),
+  getIt.registerLazySingleton<ReportsRepo>(
+    () => ReportsRepoImpl(localDataSource: getIt<ReportsLocalDataSource>()),
   );
 }
 
 void _registerUseCases(GetIt getIt) {
-  getIt.registerLazySingleton<DashboardUseCase>(
-    () => DashboardUseCase(repo: getIt<DashboardRepo>()),
+  getIt.registerLazySingleton<ReportsUseCase>(
+    () => ReportsUseCase(repo: getIt<ReportsRepo>()),
   );
 }
 
 void _registerCubits(GetIt getIt) {
-  getIt.registerFactory<DashboardCubit>(
-    () => DashboardCubit(getIt<DashboardUseCase>()),
+  getIt.registerFactory<ReportsCubit>(
+    () => ReportsCubit(getIt<ReportsUseCase>()),
   );
 }

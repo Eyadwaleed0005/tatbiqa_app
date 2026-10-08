@@ -74,6 +74,8 @@ class EndSessionDialog extends StatelessWidget {
             totalCost: totalCost,
             durationMinutes: durationMinutes,
           );
+                   Navigator.pop(context);
+ 
         },
         contentChild: Column(
           mainAxisSize: MainAxisSize.min,

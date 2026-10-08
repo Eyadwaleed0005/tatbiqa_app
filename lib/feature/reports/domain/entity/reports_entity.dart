@@ -16,7 +16,7 @@ class RoomPerformanceEntity {
   });
 }
 
-class DashboardEntity {
+class ReportsEntity {
   final double totalIncome;
   final double playstationIncome;
   final double productsIncome;
@@ -28,7 +28,7 @@ class DashboardEntity {
   final String? leastRoomByTime;
   final List<RoomPerformanceEntity> roomsPerformance;
 
-  const DashboardEntity({
+  const ReportsEntity({
     required this.totalIncome,
     required this.playstationIncome,
     required this.productsIncome,

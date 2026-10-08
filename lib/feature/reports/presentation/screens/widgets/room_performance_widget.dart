@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
-import 'package:tatbiqa/feature/reports/domain/entity/dashboard_entity.dart';
+import 'package:tatbiqa/feature/reports/domain/entity/reports_entity.dart';
 
 class RoomPerformanceWidget extends StatelessWidget {
   final List<RoomPerformanceEntity> rooms;
