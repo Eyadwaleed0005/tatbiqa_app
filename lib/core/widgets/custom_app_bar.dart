@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tatbiqa/app/dependency_injection/service_locator.dart';
 import 'package:tatbiqa/app/routes/app_images_routes.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
+import 'package:tatbiqa/feature/cafe/presentation/cubit/cafe_cubit.dart';
+import 'package:tatbiqa/feature/cafe/presentation/cubit/cafe_state.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key});
@@ -23,9 +27,28 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               borderRadius: BorderRadius.circular(8.r),
               border: Border.all(color: ColorPalette.borderColor),
             ),
-            child: Text(
-              'ELHAMOUL CITY',
-              style: AppTextStyle.fontReadexPro14MediumBlackColor,
+            child: BlocProvider(
+              create: (context) => getIt.get<CafeCubit>()..getCafeInfo(),
+              child: BlocBuilder<CafeCubit, CafeState>(
+                builder: (context, state) {
+                  if (state is GetDataCafeSuccess) {
+                    return Text(
+                      state.cafeEntity.cafeName,
+                      style: AppTextStyle.fontReadexPro14MediumBlackColor,
+                    );
+                  } else if (state is GetDataCafeError) {
+                    return Text(
+                      state.message,
+                      style: AppTextStyle.fontReadexPro14MediumBlackColor,
+                    );
+                  } else {
+                    return Text(
+                      "Guess",
+                      style: AppTextStyle.fontReadexPro14MediumBlackColor,
+                    );
+                  }
+                },
+              ),
             ),
           ),
 

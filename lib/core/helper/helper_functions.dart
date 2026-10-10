@@ -32,30 +32,29 @@ class HelperFunctions {
     }
   }
 
-  static Future<void> handleSecondButtonAction(
-    bool isBusy,
-    BuildContext context,
-    RoomEntity room,
-    SessionEntity? session,
-  ) async {
-    if (isBusy) {
-      Navigator.pushNamed(
-        context,
-        RouteNames.sessionDetails,
-        arguments: session,
-      );
-      if (context.mounted) {
-        context.read<RoomsCubit>().getRooms();
-      }
-    } else {
-      await Navigator.pushNamed(
-        context,
-        RouteNames.startSession,
-        arguments: room,
-      );
+static Future<void> handleSecondButtonAction(
+  bool isBusy,
+  BuildContext context,
+  RoomEntity room,
+  SessionEntity? session,
+) async {
+  if (isBusy) {
+    await Navigator.pushNamed(
+      context,
+      RouteNames.sessionDetails,
+      arguments: session,
+    );
+    if (context.mounted) {
+      context.read<RoomsCubit>().getRooms();
     }
+  } else {
+    await Navigator.pushNamed(
+      context,
+      RouteNames.startSession,
+      arguments: room,
+    );
   }
-
+}
   static String formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String hours = twoDigits(duration.inHours);

@@ -7,6 +7,7 @@ import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/core/widgets/custom_app_button.dart';
 import 'package:tatbiqa/core/widgets/custom_app_card.dart';
+import 'package:tatbiqa/feature/rooms/presentation/cubit/rooms_cubit.dart';
 import 'package:tatbiqa/feature/sessions/domain/entity/session_entity.dart';
 import 'package:tatbiqa/feature/sessions/domain/entity/session_product_entity.dart';
 import 'package:tatbiqa/feature/sessions/presentation/cubit/session_product_cubit/session_product_cubit.dart';
@@ -120,10 +121,10 @@ class SessionActionsSection extends StatelessWidget {
                     RouteNames.addDrinksToSession,
                     arguments: session,
                   );
-                  
-                    context.read<SessionProductCubit>()
-                        .getSessionProducts(session.id);
-                
+                    if (context.mounted) {
+    context.read<SessionProductCubit>().getSessionProducts(session.id);
+  }
+                   
                 },
               ),
             ),
