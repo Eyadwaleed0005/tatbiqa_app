@@ -23,7 +23,7 @@ class TatbiqaApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
           locale: DevicePreviewService.locale(context),
-          theme: ThemeData(),
+          theme: ThemeData.dark(),
           initialRoute: RouteNames.splashScreen,
           onGenerateRoute: AppRoutes.generateRoute,
           builder: _buildApp,

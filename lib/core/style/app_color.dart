@@ -10,7 +10,7 @@ class ColorPalette {
   static const Color bgInteractive = Color(0xff2B2833);
 
   static const Color borderColor = Color(0xff3D494C);
-
+  static const Color purple= Color(0xFF9333EA);
   static const Color warning = Color(0xFFB8860B);
   static const Color error = Color(0xFFC0392B);
   static const Color whiteColor = Color(0xffE7E0EE);
