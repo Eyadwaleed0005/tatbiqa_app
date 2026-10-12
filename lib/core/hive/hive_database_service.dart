@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:tatbiqa/core/hive/local_database_service.dart';
+
 import 'dart:developer' as developer;
+
 class HiveDatabaseService implements LocalDatabaseService {
   HiveDatabaseService({
     this.enableLogging = kDebugMode,
@@ -45,6 +47,21 @@ class HiveDatabaseService implements LocalDatabaseService {
     );
   }
 
+@override
+Future<void> putAll<T>({
+  required String boxName,
+  required Map<dynamic, T> entries,
+}) async {
+  return _execute(
+    operation: 'PUT ALL',
+    boxName: boxName,
+    requestData: {'count': entries.length},
+    action: () async {
+      final box = await _getBox<T>(boxName);
+      await box.putAll(entries);
+    },
+  );
+}
   @override
   Future<void> putData<T>({
     required String boxName,
@@ -63,10 +80,7 @@ class HiveDatabaseService implements LocalDatabaseService {
   }
 
   @override
-  Future<void> addData<T>({
-    required String boxName,
-    required T value,
-  }) async {
+  Future<void> addData<T>({required String boxName, required T value}) async {
     return _execute(
       operation: 'ADD DATA',
       boxName: boxName,
@@ -79,13 +93,18 @@ class HiveDatabaseService implements LocalDatabaseService {
   }
 
   @override
-  Future<void> deleteData({required String boxName, required dynamic key}) async {
+  Future<void> deleteData<T>({
+    required String boxName,
+    required dynamic key,
+  }) async {
     return _execute(
       operation: 'DELETE DATA',
       boxName: boxName,
       requestData: {'key': key},
       action: () async {
-        final box = await _getBox(boxName);
+        final box = Hive.isBoxOpen(boxName)
+            ? Hive.box<T>(boxName)
+            : await Hive.openBox<T>(boxName);
         await box.delete(key);
       },
     );
@@ -93,7 +112,10 @@ class HiveDatabaseService implements LocalDatabaseService {
 
   @override
   Stream<BoxEvent> watchBox({required String boxName}) async* {
-    final box = await _getBox(boxName);
+    final box = Hive.isBoxOpen(boxName)
+        ? Hive.box(boxName)
+        : await Hive.openBox(boxName);
+
     _logStream(operation: 'WATCH BOX', boxName: boxName);
     yield* box.watch();
   }
@@ -208,12 +230,20 @@ class HiveDatabaseService implements LocalDatabaseService {
       ..writeln('│ Error: $error')
       ..writeln('└─────────────────────────────────────');
 
-      developer.log(buffer.toString(), name: 'HiveDatabaseService', error: error, stackTrace: stackTrace);
+    developer.log(
+      buffer.toString(),
+      name: 'HiveDatabaseService',
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   void _logStream({required String operation, required String boxName}) {
     if (!enableLogging) return;
-    developer.log('⚡ HIVE STREAM [Box: $boxName] -> Listen Started', name: 'HiveDatabaseService');
+    developer.log(
+      '⚡ HIVE STREAM [Box: $boxName] -> Listen Started',
+      name: 'HiveDatabaseService',
+    );
   }
 
   String _prettyPrint(Object object) {
@@ -222,5 +252,13 @@ class HiveDatabaseService implements LocalDatabaseService {
 
   String _addLinePrefix(String text) {
     return text.split('\n').map((line) => '│   $line').join('\n');
+  }
+
+  @override
+  Future<T?> getData<T>({required String boxName, required dynamic key}) async {
+    final box = Hive.isBoxOpen(boxName)
+        ? Hive.box<T>(boxName)
+        : await Hive.openBox<T>(boxName);
+    return box.get(key);
   }
 }

@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tatbiqa/core/helper/spacer.dart';
+import 'package:tatbiqa/core/style/app_animations.dart';
+import 'package:tatbiqa/feature/reports/presentation/cubit/reports_cubit.dart';
+import 'package:tatbiqa/feature/reports/presentation/cubit/reports_state.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/custom_grid_view.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/dashboard_widgets/dashboard_header.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/dashboard_widgets/dashboard_tabs.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/error_view.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/room_performance_widget.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/room_summry_widget.dart';
+import 'package:tatbiqa/feature/reports/presentation/screens/widgets/total_play_time_widget.dart';
+
+class DashboardScreenContent extends StatefulWidget {
+  const DashboardScreenContent({super.key});
+
+  @override
+  State<DashboardScreenContent> createState() => _DashboardScreenContentState();
+}
+
+class _DashboardScreenContentState extends State<DashboardScreenContent> {
+  int _tabIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  void _fetchData() {
+    final cubit = context.read<ReportsCubit>();
+    final now = DateTime.now();
+    _tabIndex == 0
+        ? cubit.fetchDailyReport(now)
+        : cubit.fetchMonthlyReport(now.year, now.month);
+  }
+
+  void _onTabChanged(int index) {
+    setState(() => _tabIndex = index);
+    _fetchData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: BlocBuilder<ReportsCubit, ReportsState>(
+        builder: (context, state) {
+          if (state is ReportsError) {
+            return ErrorView(message: state.message);
+          }
+          if (state is ReportsLoaded) {
+            final report = state.report;
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+              child: AppAnimations.screenSection(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const DashboardHeader(),
+                    verticalSpace(16),
+                    DashboardTabs(
+                      selectedIndex: _tabIndex,
+                      onTabChanged: _onTabChanged,
+                    ),
+                    verticalSpace(16),
+                    CustomGridView(report: report),
+                    verticalSpace(8),
+                    TotalPlayTimeWidget(
+                      title: "إجمالي وقت اللعب",
+                      timeValue: "${report.totalPlayMinutes} دقيقة",
+                    ),
+                    verticalSpace(8),
+                    RoomsSummaryWidget(
+                      title: "ملخص الغرف",
+                      summaries: [
+                        "أكثر غرفة دخلًا: ${report.topRoomByRevenue ?? 'لا توجد بيانات'}",
+                        "أقل غرفة دخلًا: ${report.leastRoomByRevenue ?? 'لا توجد بيانات'}",
+                        "أكثر غرفة وقتًا: ${report.topRoomByTime ?? 'لا توجد بيانات'}",
+                        "أقل غرفة وقتًا: ${report.leastRoomByTime ?? 'لا توجد بيانات'}",
+                      ],
+                    ),
+                    verticalSpace(12),
+                    RoomPerformanceWidget(rooms: report.roomsPerformance),
+                  ],
+                ),
+              ),
+            );
+          }
+
+          return const SizedBox.shrink();
+        },
+      ),
+    );
+  }
+}

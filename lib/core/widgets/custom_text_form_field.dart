@@ -42,8 +42,8 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final String? labelText;
-  final TextStyle? labelStyle; 
-  final TextStyle? hintStyle; 
+  final TextStyle? labelStyle;
+  final TextStyle? hintStyle;
 
   final FocusNode? focusNode;
   final TextInputType? keyboardType;
@@ -138,16 +138,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
     if (widget.suffixIcon != null) {
       icon = widget.suffixIcon;
-      onTap = widget.onSuffixTap ;
+      onTap = widget.onSuffixTap;
       tooltipMessage = widget.suffixTooltip;
     } else if (widget.isPassword && widget.showPasswordCopyIcon) {
-      icon = Icon(
-        Icons.copy_rounded,
-        color: ColorPalette.gray,
-        size: 20.sp,
-      );
-      onTap = widget.onSuffixTap ;
-      tooltipMessage = widget.suffixTooltip ;
+      icon = Icon(Icons.copy_rounded, color: ColorPalette.gray, size: 20.sp);
+      onTap = widget.onSuffixTap;
+      tooltipMessage = widget.suffixTooltip;
     }
 
     if (icon == null) {
@@ -187,7 +183,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: ColorPalette.primary,
-          selectionColor: ColorPalette.primary.withOpacity(0.3),
+          selectionColor: ColorPalette.primary.withValues(alpha: 0.3),
           selectionHandleColor: ColorPalette.primary,
         ),
       ),
@@ -219,18 +215,19 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
             hintText: widget.hintText,
-            hintStyle: widget.hintStyle ??
+            hintStyle:
+                widget.hintStyle ??
                 AppTextStyle.fontReadexPro14RegularWhiteColor,
-              
+
             filled: true,
-            fillColor: const Color(0xFF130F1F),
+            fillColor: const Color(0xff0F0D16),
             contentPadding: EdgeInsets.symmetric(
               horizontal: 16.w,
               vertical: 14.h,
             ),
             suffixIcon: _buildSuffixIcon(),
             enabledBorder: _buildBorder(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               width: 1,
             ),
             focusedBorder: _buildBorder(
@@ -238,7 +235,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               width: 1.5,
             ),
             disabledBorder: _buildBorder(
-              color: Colors.white.withOpacity(0.05),
+              color: Colors.white.withValues(alpha: 0.05),
               width: 1,
             ),
             errorBorder: _buildBorder(color: errorColor, width: 1),
@@ -259,8 +256,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           widget.labelText!,
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
-          style: widget.labelStyle ??
-              AppTextStyle.fontReadexPro12MediumGrayColor
+          style:
+              widget.labelStyle ?? AppTextStyle.fontReadexPro12MediumGrayColor,
         ),
         verticalSpace(6),
         textField,
