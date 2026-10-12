@@ -13,9 +13,9 @@ class CustomEmptyState extends StatelessWidget {
   });
 
   final Widget? icon;
-  final String title;
-  final String? description;
-  final Widget? actionButton;
+  final String title; 
+  final String? description; 
+  final Widget? actionButton; 
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,15 @@ class CustomEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (icon != null) ...[icon!, verticalSpace(24)],
+            if (icon != null) ...[
+              icon!,
+              verticalSpace(24),
+            ],
 
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyle.fontCairo24BoldWhiteColor,
+              style: AppTextStyle.fontCairoPlay24BoldWhiteColor
             ),
 
             if (description != null) ...[
@@ -39,11 +42,14 @@ class CustomEmptyState extends StatelessWidget {
               Text(
                 description!,
                 textAlign: TextAlign.center,
-                style: AppTextStyle.fontReadexPro14RegularGrayColor,
+                style: AppTextStyle.fontReadexPro14RegularGrayColor
               ),
             ],
 
-            if (actionButton != null) ...[verticalSpace(24), actionButton!],
+            if (actionButton != null) ...[
+              verticalSpace(24),
+              actionButton!,
+            ],
           ],
         ),
       ),
