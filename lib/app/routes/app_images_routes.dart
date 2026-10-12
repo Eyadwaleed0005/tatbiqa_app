@@ -14,7 +14,9 @@ class AppImage {
   final String baseIcons = 'assets/icons/';
 
   // ===== images =====
+  
 
-  static const splashLogo = "assets/images/splash_logo.svg";
+  // ===== icons =====
+ 
   // ===== animations =====
 }
