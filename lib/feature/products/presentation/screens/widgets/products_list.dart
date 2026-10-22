@@ -40,7 +40,6 @@ class ProductsList extends StatelessWidget {
           );
         }
 
-        // 2. حالة الخطأ
         if (state is ProductsFailure) {
           return SliverFillRemaining(
             hasScrollBody: false,
