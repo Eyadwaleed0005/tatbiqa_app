@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,12 +9,17 @@ import 'package:tatbiqa/core/hive/feature/cafe_hive_setup.dart';
 import 'package:tatbiqa/core/hive/feature/product_hive_setup.dart';
 import 'package:tatbiqa/core/hive/feature/rooms_hive_setup.dart';
 import 'package:tatbiqa/core/hive/feature/sessions_hive_setup.dart';
+import 'package:tatbiqa/firebase_options.dart';
 
 abstract final class AppInitializer {
   AppInitializer._();
 
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
     await SystemChrome.setPreferredOrientations(const <DeviceOrientation>[
       DeviceOrientation.portraitUp,

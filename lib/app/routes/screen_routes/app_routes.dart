@@ -6,6 +6,7 @@ import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/add_drinks_to_
 import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/session_details_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/sessions/start_session_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/feature/setup_cafe_routes.dart';
+import 'package:tatbiqa/app/routes/screen_routes/feature/subscription_routes.dart';
 
 abstract final class AppRoutes {
   const AppRoutes._();
@@ -18,6 +19,7 @@ abstract final class AppRoutes {
         SessionDetailsRoutes.generateRoute(settings)??
         AddDrinksToSessionRoutes.generateRoute(settings)??
         RoomSettingsRoutes.generateRoute(settings)??
+        SubscriptionRoutes.generateRoute(settings)??
         _buildUnknownRoute(settings);
   }
 

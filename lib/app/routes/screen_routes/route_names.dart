@@ -12,5 +12,8 @@ abstract final class RouteNames {
   static const String roomSettings = '/roomSettings';
 
 
+
+  static const String subscription = '/Subscription';
+
 }
 

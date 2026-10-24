@@ -38,6 +38,6 @@ void _registerUseCases(GetIt getIt) {
 void _registerCubits(GetIt getIt) {
   
   getIt.registerFactory<CafeCubit>(
-    () => CafeCubit(  cafeUseCase: getIt<CafeUseCase>(),),
+    () => CafeCubit(  cafeUseCase: getIt<CafeUseCase>(), subscriptionUseCase: getIt(),),
   );
 }

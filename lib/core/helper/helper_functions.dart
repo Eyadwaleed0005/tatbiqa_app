@@ -196,4 +196,18 @@ static Future<void> handleSecondButtonAction(
       },
     );
   }
+  
+static  String formatArabicDate(DateTime d) {
+    const months = [
+      'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر',
+    ];
+    return '${d.day} ${months[d.month - 1]} ${d.year}';
+  }
+ static String normalizePhone(String p) {
+  var d = p.replaceAll(RegExp(r'[^0-9]'), '');
+  if (d.startsWith('20')) d = d.substring(2);
+  if (!d.startsWith('0')) d = '0$d';
+  return d;
+}
 }

@@ -6,6 +6,7 @@ import 'package:tatbiqa/app/dependency_injection/features/products_dependencies.
 import 'package:tatbiqa/app/dependency_injection/features/reports_dependencies.dart';
 import 'package:tatbiqa/app/dependency_injection/features/rooms_dependencies.dart';
 import 'package:tatbiqa/app/dependency_injection/features/sessions_setup_dependencies.dart';
+import 'package:tatbiqa/app/dependency_injection/features/subscription_dependencies.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -17,4 +18,5 @@ void setupServiceLocator() {
   registerSessionsDependencies(getIt);
   registerAddSessionProductDependencies(getIt);
   registerDashboardDependencies(getIt);
+  registerSubscriptionDependencies(getIt);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
@@ -6,11 +7,14 @@ import 'package:tatbiqa/app/routes/app_images_routes.dart';
 import 'package:tatbiqa/app/routes/screen_routes/route_names.dart';
 import 'package:tatbiqa/core/helper/spacer.dart';
 import 'package:tatbiqa/core/hive/hive_boxes.dart';
+import 'package:tatbiqa/core/hive/hive_keys.dart';
 import 'package:tatbiqa/core/style/app_color.dart';
 import 'package:tatbiqa/core/style/textstyles.dart';
 import 'package:tatbiqa/feature/app_startup/presentation/screens/widgets/dashed_circles_widget.dart';
 import 'package:tatbiqa/feature/app_startup/presentation/screens/widgets/splash_loading_bar.dart';
 import 'package:tatbiqa/feature/cafe/data/models/cafe_model.dart';
+import 'package:tatbiqa/feature/subscription/presentation/cubit/subscription_cubit.dart';
+import 'package:tatbiqa/feature/subscription/presentation/cubit/subscription_state.dart';
 
 class SplashScreenContent extends StatefulWidget {
   const SplashScreenContent({super.key});
@@ -116,113 +120,144 @@ class _SplashScreenContentState extends State<SplashScreenContent>
     _textFloatController.dispose();
     super.dispose();
   }
-void _goNext() {
-  if (!mounted) return;
 
-  final box = Hive.box<CafeModel>(HiveBoxes.cafe);
-  final bool isSetupDone = box.isNotEmpty;
+  void _goNext() {
+    if (!mounted) return;
+    final box = Hive.box<CafeModel>(HiveBoxes.cafe);
+    final cafe = box.get(HiveKeys.kCafeId);
 
-  Navigator.pushReplacementNamed(
-    context,
-    isSetupDone ? RouteNames.main : RouteNames.setupCafe,
-  );
-}
+    if (cafe == null) {
+      Navigator.pushReplacementNamed(context, RouteNames.setupCafe);
+    } else {
+      context.read<SubscriptionCubit>().checkStatus(cafe);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Listenable.merge([
-        _circlesController,
-        _imagePopupController,
-        _textPopupController,
-        _imageFloatController,
-        _textFloatController,
-      ]),
-      builder: (context, child) {
-        return Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: ColorPalette.blackColor,
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [const Color(0xFF131d30), ColorPalette.blackColor],
-              stops: const [0.3, 0.7],
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                Column(
+    return BlocListener<SubscriptionCubit, SubscriptionState>(
+      listener: (context, state) {
+
+        if (!mounted) return;
+
+        if (state is SubscriptionActiveState) {
+          final box = Hive.box<CafeModel>(HiveBoxes.cafe);
+          final bool isSetupDone = box.isNotEmpty;
+
+          Navigator.pushReplacementNamed(
+            context,
+            isSetupDone ? RouteNames.main : RouteNames.setupCafe,
+          );
+        } else if (state is SubscriptionExpiredState) {
+
+          Navigator.pushReplacementNamed(
+            context,
+            RouteNames.subscription,
+            arguments: state,
+          );
+        } else if (state is SubscriptionErrorState) {
+          
+          Navigator.pushReplacementNamed(context, RouteNames.subscription);
+        }
+      },
+      child: AnimatedBuilder(
+        animation: Listenable.merge([
+          _circlesController,
+          _imagePopupController,
+          _textPopupController,
+          _imageFloatController,
+          _textFloatController,
+        ]),
+        builder: (context, child) {
+          return Scaffold(
+            body: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: ColorPalette.blackColor,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [const Color(0xFF131d30), ColorPalette.blackColor],
+                  stops: const [0.3, 0.7],
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FadeTransition(
-                      opacity: _imagePopupFadeAnimation,
-                      child: ScaleTransition(
-                        scale: _imageScaleAnimation,
-                        child: DashedCirclesWidget(
-                          thisChild: Transform.translate(
-                            offset: Offset(_imageFloatAnimation.value, 0),
-                            child: SvgPicture.asset(
-                              AppImage.splashLogo,
-                              width: 270,
-                              height: 270,
-                              fit: BoxFit.contain,
+                    const Spacer(),
+                    Column(
+                      children: [
+                        FadeTransition(
+                          opacity: _imagePopupFadeAnimation,
+                          child: ScaleTransition(
+                            scale: _imageScaleAnimation,
+                            child: DashedCirclesWidget(
+                              thisChild: Transform.translate(
+                                offset: Offset(_imageFloatAnimation.value, 0),
+                                child: SvgPicture.asset(
+                                  AppImage.splashLogo,
+                                  width: 270,
+                                  height: 270,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    verticalSpace(20),
-                    FadeTransition(
-                      opacity: _textPopupFadeAnimation,
-                      child: ScaleTransition(
-                        scale: _textScaleAnimation,
-                        child: Transform.translate(
-                          offset: Offset(0, _textFloatAnimation.value),
-                          child: Column(
-                            children: [
-                              Text(
-                                'تطبيقة',
-                                style: AppTextStyle.fontCairo32BoldWhiteColor,
+                        verticalSpace(20),
+                        FadeTransition(
+                          opacity: _textPopupFadeAnimation,
+                          child: ScaleTransition(
+                            scale: _textScaleAnimation,
+                            child: Transform.translate(
+                              offset: Offset(0, _textFloatAnimation.value),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'تطبيقة',
+                                    style:
+                                        AppTextStyle.fontCairo32BoldWhiteColor,
+                                  ),
+                                  verticalSpace(6),
+                                  Text(
+                                    'تطبيق إدارة صالات البلايستيشن',
+                                    style: AppTextStyle
+                                        .fontReadexPro14RegularGrayColor,
+                                  ),
+                                ],
                               ),
-                              verticalSpace(6),
-                              Text(
-                                'تطبيق إدارة صالات البلايستيشن',
-                                style: AppTextStyle
-                                    .fontReadexPro14RegularGrayColor,
-                              ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
+                    const Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        if (_canStartLoading) ...[
+                          Text(
+                            'اكتمال مزامنة النظام',
+                            style: AppTextStyle.fontReadexPro10MediumGrayColor,
+                          ),
+                          verticalSpace(6),
+                          SplashLoadingBar(
+                            duration: const Duration(seconds: 3),
+                            onCompleted: _goNext,
+                          ),
+                        ],
+                      ],
+                    ),
+                    verticalSpace(100),
                   ],
                 ),
-                const Spacer(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    if (_canStartLoading) ...[
-                      Text(
-                        'اكتمال مزامنة النظام',
-                        style: AppTextStyle.fontReadexPro10MediumGrayColor,
-                      ),
-                      verticalSpace(6),
-                      SplashLoadingBar(
-                        duration: const Duration(seconds: 3),
-                        onCompleted:_goNext
-                      ),
-                    ],
-                  ],
-                ),
-                verticalSpace(100),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
