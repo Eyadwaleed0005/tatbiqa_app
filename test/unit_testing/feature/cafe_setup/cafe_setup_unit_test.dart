@@ -7,16 +7,25 @@ import 'package:tatbiqa/feature/cafe/domain/entity/cafe_entity.dart';
 import 'package:tatbiqa/feature/cafe/domain/usecase/cafe_use_case.dart';
 import 'package:tatbiqa/feature/cafe/presentation/cubit/cafe_cubit.dart';
 import 'package:tatbiqa/feature/cafe/presentation/cubit/cafe_state.dart';
+import 'package:tatbiqa/feature/subscription/domain/usecase/subscription_usecase.dart';
 
 class MockCafeUseCase extends Mock implements CafeUseCase {}
+
+class MockSubscriptionUseCase extends Mock
+    implements CheckSubscriptionUseCase {}
 
 void main() {
   late CafeCubit cubit;
   late MockCafeUseCase mockUseCase;
+  late MockSubscriptionUseCase mockSubscriptionUseCase;
 
   setUp(() {
     mockUseCase = MockCafeUseCase();
-    cubit = CafeCubit(cafeUseCase: mockUseCase);
+    mockSubscriptionUseCase = MockSubscriptionUseCase();
+    cubit = CafeCubit(
+      cafeUseCase: mockUseCase,
+      subscriptionUseCase: mockSubscriptionUseCase,
+    );
   });
 
   tearDown(() {
@@ -48,6 +57,9 @@ void main() {
       'emits [SaveCafeDataLoading, SaveCafeDataSuccess] when saveCafeInfo is successful',
       build: () {
         when(
+          () => mockSubscriptionUseCase.registerTrial(tPhone),
+        ).thenAnswer((_) async {});
+        when(
           () => mockUseCase.saveCafeInfo(
             cafeName: tCafeName,
             email: tEmail,
@@ -68,11 +80,17 @@ void main() {
         SaveCafeDataLoading(),
         const SaveCafeDataSuccess(cafeEntity: tCafeEntity),
       ],
+      verify: (_) {
+        verify(() => mockSubscriptionUseCase.registerTrial(tPhone)).called(1);
+      },
     );
 
     blocTest<CafeCubit, CafeState>(
       'emits [SaveCafeDataLoading, SaveCafeDataError] when saveCafeInfo fails',
       build: () {
+        when(
+          () => mockSubscriptionUseCase.registerTrial(tPhone),
+        ).thenAnswer((_) async {});
         when(
           () => mockUseCase.saveCafeInfo(
             cafeName: tCafeName,
@@ -93,6 +111,33 @@ void main() {
         SaveCafeDataLoading(),
         const SaveCafeDataError(message: 'Failed to save cafe'),
       ],
+    );
+
+    blocTest<CafeCubit, CafeState>(
+      'emits [SaveCafeDataLoading, SaveCafeDataError] and does NOT save when registerTrial throws',
+      build: () {
+        when(
+          () => mockSubscriptionUseCase.registerTrial(tPhone),
+        ).thenThrow(Exception('no internet'));
+        return cubit;
+      },
+      act: (cubit) => cubit.saveCafeInfo(
+        cafeName: tCafeName,
+        email: tEmail,
+        ownerName: tOwnerName,
+        phone: tPhone,
+      ),
+      expect: () => [SaveCafeDataLoading(), isA<SaveCafeDataError>()],
+      verify: (_) {
+        verifyNever(
+          () => mockUseCase.saveCafeInfo(
+            cafeName: any(named: 'cafeName'),
+            email: any(named: 'email'),
+            ownerName: any(named: 'ownerName'),
+            phone: any(named: 'phone'),
+          ),
+        );
+      },
     );
   });
 
